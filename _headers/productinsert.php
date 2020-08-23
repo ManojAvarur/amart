@@ -8,6 +8,8 @@
         
         $pd_name = mysqli_escape_string( $con, $_POST['pname']  );
 
+        $pd_id = mysqli_escape_string( $con, $_POST['pid']  );
+
         $pd_cat = mysqli_escape_string( $con, $_POST['category'] );
 
         $pd_price = mysqli_escape_string( $con, $_POST['price'] );
@@ -16,8 +18,8 @@
 
         $pd_offers = mysqli_escape_string( $con, $_POST['offers'] );
 
-        $sql  = "INSERT INTO PRODUCT (  PRD_CAT_ID, PRD_NAME, PRD_DETAILS, PRD_PRICE, PRD_OFFERS )  ";
-        $sql .= "VALUES ( $pd_cat, '$pd_name', '$pd_desc', $pd_price, '$pd_offers' ); ";
+        $sql  = "INSERT INTO PRODUCT ( PRD_ID, PRD_CAT_ID, PRD_NAME, PRD_DETAILS, PRD_PRICE, PRD_OFFERS )  ";
+        $sql .= "VALUES ( $pd_id, $pd_cat, '$pd_name', '$pd_desc', $pd_price, '$pd_offers' ); ";
 
 
 

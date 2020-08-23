@@ -91,7 +91,7 @@ function mailing($email, $val){
 
 
     $mail->isHTML(true);                                  // Set email format to HTML
-    $message = "<strong> Gube Keerthana! '".$email."'  =  $val </strong>";
+    $message = "<strong> Hello! '".$email."'  =  $val </strong>";
 
     $mail->Subject = 'Verification Message';
     $mail->Body    = $message;//'This is the HTML message body <b>in bold!</b>';
@@ -100,6 +100,24 @@ function mailing($email, $val){
     if(!$mail->send()) {
         echo "<script> alert('Message could not be sent \n Error Info :  $mail->ErrorInfo ') </script>";
         die();
+    }
+
+}
+
+
+
+function echoCategories(){
+
+    global $con;
+
+    $sql = "SELECT CAT_ID, CAT_NAME FROM category";
+
+    $sql = mysqli_query( $con, $sql );
+
+    while ( $row = mysqli_fetch_assoc( $sql )) {
+
+        echo "<option value='" . $row['CAT_ID'] . "'> " . $row['CAT_NAME'] . " </option>";
+       
     }
 
 }

@@ -1,6 +1,7 @@
 <?php
     require "functions.php";
     session_start();
+    // error_reporting(0);
 
     if( isset( $_SESSION['postdata']['email'] ) && isset( $_SESSION['postdata']['verification'] ) ){
 

@@ -135,7 +135,7 @@ if (isset($_SESSION['postdata']))
                     <div class="card card-signin my-5">
                         <div class="card-body">
                             <h5 class="card-title text-center">Email Verification!</h5>
-                            <p style="margin-top: -8%;padding-bottom: 5%;text-align: center;">Check your mail for activation passcode</p>
+                            <p style="margin-top: -8%;padding-bottom: 5%;text-align: center;">Check your mail '<?php echo $_SESSION['postdata']['email'] ?>' for activation passcode</p>
 
                        <?php
 
@@ -154,6 +154,11 @@ if (isset($_SESSION['postdata']))
                                 <p style="padding-top: 3%; text-align: right; margin-right: 2%;">Didn't receive a mail? 
                                     <span>
                                         <a href="" id="linkRef">Try Again</a>
+                                    </span>
+                                </p>
+                                <p style='padding-top: 3%; text-align: right; margin-right: 2%;'>Incorrect Mail?
+                                    <span>
+                                        <a href=''  onclick="window.history.go(-1); return false;" id='mailReset'>Click Here</a>
                                     </span>
                                 </p>
                                 <hr class="my-4">
@@ -219,19 +224,20 @@ if (isset($_SESSION['postdata']))
     <script type = "text/javascript"> 
 
         var myvar = setInterval(myTimer, 1000);
-        var counter = 20;
+        var timerSec = 30; 
+        var counter = timerSec;
         var Link = document.getElementById("linkRef");
         Link.href = "javascript:void(0)";
         Link.classList.add("disabled-link");
 
         function myTimer() {
-            Link.innerHTML = " Try After : "+counter;
+            Link.innerHTML = " Try After : "+counter+"sec";
             
             counter = counter - 1;
 
             if(counter<0){
                 clearInterval(myvar);
-                counter = 20;
+                counter = timerSec;
                 Link.href = "_headers/resendmail.php";   
                 Link.innerHTML = " Try Again";
                 Link.classList.remove("disabled-link");

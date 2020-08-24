@@ -1,9 +1,9 @@
-<?php require "_headers/connection.php" ?>
-
-<?php require "_headers/functions.php" ?>
-
-
 <?php 
+
+require "_headers/connection.php" ;
+ 
+require "_headers/functions.php" ;
+
 session_start();
 
 if( isset( $_SESSION['ID'] ) ){
@@ -16,6 +16,8 @@ if( isset( $_SESSION['ID'] ) ){
     cookieCheck();
 
     global $con; 
+
+    $spanCheck = false;
  
     if(isset($_POST['submit'])) { 
 
@@ -67,23 +69,13 @@ if( isset( $_SESSION['ID'] ) ){
 
             }
 
-            unset(  $_SESSION['spanCheck'] );
-
             echo "<script> if( window.history.replaceState ){
                 window.history.replaceState( null, null, location.href='index.php' );
                }
                 </script>";
                 
         } else {
-    
-            $_SESSION['spanCheck'] = 0;
-
-            echo "<script> if( window.history.replaceState ){
-                window.history.replaceState( null, null, location.href='login.php' );
-               }
-                </script>";
-
-                
+            $spanCheck = true;               
         }
 
 
@@ -163,7 +155,7 @@ if( isset( $_SESSION['ID'] ) ){
                         <div class="card-body">
                             <h5 class="card-title text-center">Sign In</h5>
                     <?php
-                        if( isset( $_SESSION['spanCheck'] ) ){
+                        if( $spanCheck  ){
                     ?>
                             <h6 class="text-center" style="color: red;"><strong>Incorrect Username (or) Password</strong></h6>
                             <br>
@@ -183,6 +175,7 @@ if( isset( $_SESSION['ID'] ) ){
                                 </div>
 
                                 <input type="checkbox" id="rememberMe" style="margin-left: 3%;" value="true" name="rememberMe"><label for="rememberMe" style="padding-left: 2%; padding-bottom: 3%;">Remember me</label>
+                                <a href="forgot_password.php?140bedbf9c3f6d2ba70887=01&&e4fdcd380b2c0090=22541stringo&&ef0176f7b6e2c9a23e0238c07c4af0cc=5798c9e47ce8b1f58a8d73f93c054d0d&&ff52d77ce7f2a218ea3=3dad68202cf0ca46ca13b9d13b3cf338" class="forgot_pass">Forgot Password?</a>
                                 <button class="btn btn-lg btn-block text-uppercase" name="submit" style="background-color: #000; color: #fff;" type="submit">Log in</button>
                                 <p style="padding-top: 3%; text-align: right; margin-right: 2%;">New User? <span><a href="signup.php">Sign Up</a></span></p>
                                 <hr class="my-4">

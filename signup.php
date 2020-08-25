@@ -208,6 +208,8 @@ if(isset($_POST['submit'])) {
     <script src="assets/vendor/aos/aos.js"></script>
     <script src="assets/js/main.js"></script>
 </body>
+
+
 <script type="text/javascript" language="javascript">
     function checkform() {
         var f = document.forms["signupform"].elements;

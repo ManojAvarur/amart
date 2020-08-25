@@ -230,8 +230,7 @@ if(isset($_POST['submit'])) {
             alert("PASSWORDS DO NOT MATCH: \nPlease try again...");
             document.getElementById('inputPassword1').value = ""; 
             return false;
-        } 
-        
+        }    
     }
 </script>
 

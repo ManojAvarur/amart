@@ -7,13 +7,18 @@
         setcookie("AMRMLO", "", time() - 3600, "/");   
 
     }
-
-    session_destroy();
     
-    if(!isset($_GET['LD']))
-        header('location:../index.php');
+    if( !isset( $_SESSION['ADID'] ) )
+        $loc = 'location:../index.php';
     else
-        header('location:../admin/admin_login.php');
+        $loc = 'location:../admin/admin_login.php';
+
+        session_destroy();
+
+    if( isset( $loc ) )
+        header($loc);
+    else
+        header('location:../index.php');
         
 ?>
     

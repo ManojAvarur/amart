@@ -11,10 +11,20 @@ require "../_headers/connection.php";
 
         }
 
-        $sql = "SELECT COUNT(LOGIN_ID) FROM LOGIN; ";
-        $sqlResult = mysqli_query($con, $sql);
+        global $con;
 
-        $res = mysqli_fetch_assoc($sqlResult);
+        $sql = "SELECT COUNT(LOGIN_ID) FROM LOGIN; ";
+
+        $res = mysqli_query($con, $sql);
+
+        $res = mysqli_fetch_assoc($res);
+
+
+        $sql = "SELECT COUNT(PRD_ID) FROM product;  ";
+        
+        $res2 = mysqli_query($con, $sql);
+
+        $res2 = mysqli_fetch_assoc($res2);
 
         // print_r(mysqli_fetch_assoc($sqlResult));
 
@@ -55,7 +65,7 @@ require "../_headers/connection.php";
                 <div class="dropdown-content">
                     <a href="admin_index.html">Home</a>
                     <a href="admin_details.php">My Account</a>
-                    <a href="../_headers/logout.php?LD">Log Out</a>
+                    <a href="../_headers/logout.php">Log Out</a>
                 </div>
             </div>
         </div>
@@ -114,7 +124,7 @@ require "../_headers/connection.php";
                             <div class="col-md-6 d-md-flex align-items-md-stretch">
                                 <div class="count-box">
                                     <i class="icofont-document-folder"></i>
-                                    <span data-toggle="counter-up">185</span>
+                                    <span data-toggle="counter-up"><?php echo $res2['COUNT(PRD_ID)'];?></span>
                                     <p><strong>Products</strong></p>
                                 </div>
                             </div>
@@ -122,7 +132,7 @@ require "../_headers/connection.php";
                             <div class="col-md-6 d-md-flex align-items-md-stretch">
                                 <div class="count-box">
                                     <i class="icofont-clock-time"></i>
-                                    <span data-toggle="counter-up">8</span>
+                                    <span data-toggle="counter-up" id="yoExperience" ></span>
                                     <p><strong>Years in operation</strong></p>
                                 </div>
                             </div>
@@ -181,6 +191,13 @@ require "../_headers/connection.php";
     <script src="../assets/vendor/counterup/counterup.min.js"></script>
     <script src="../assets/vendor/aos/aos.js"></script>
     <script src="../assets/js/main.js"></script>
+    <script>
+        $(function () {
+            var year = new Date();
+            document.getElementById("yoExperience").innerHTML = year.getFullYear() - 2020 ; 
+             } 
+        );
+    </script>
 </body>
 
 

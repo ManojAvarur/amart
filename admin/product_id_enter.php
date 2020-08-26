@@ -1,17 +1,9 @@
 <?php 
-
-require "../_headers/functions.php";
-
-    session_start();
-
-    if (isset($_SESSION['ADID'])) {
-
-        if(!isset($_SESSION['ADBASICINFO'])) {
-
-            setBasicInfo($_SESSION['ADID'], false);
-
-        }
+// setBasicInfo($_SESSION['ADID'], false);
+session_start(); 
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +11,7 @@ require "../_headers/functions.php";
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Amart Admin</title>
+    <title>Amart</title>
     <meta content="Amart, amart sales, amart india" name="description">
     <meta content="Amart, India, Sales, Refrigerator Sales, TV Sales, Hardware Sales" name="keywords">
     <link href="../assets/img/a.png" rel="icon">
@@ -37,7 +29,7 @@ require "../_headers/functions.php";
 </head>
 
 <body>
-    <header id="header" class="fixed-top ">
+<header id="header" class="fixed-top ">
         <div class="container d-flex align-items-center justify-content-between">
             <h1 class="logo"><a href="index.html">Amart<span style="font-size: medium;">ADMIN</span></a></h1>
             <nav class="nav-bar d-none d-lg-block">
@@ -72,92 +64,34 @@ require "../_headers/functions.php";
         </div>
     </header>
 
-    <section id="admin_home" class="d-flex align-items-center justify-content-center">
+    <div class="admin_log_main">
         <div class="container">
-            <div class="row justify-content-center" data-aos="fade-down" data-aos-delay="150">
-                <div class="col-xl-6 col-lg-8">
-                    <script type="text/javascript">
-                        document.write("<h1>");
-                        var day = new Date();
-                        var hr = day.getHours();
-                        if (hr >= 0 && hr < 12) {
-                            document.write("Good Morning<span>!</span>");
-                        } else if (hr >= 12 && hr <= 17) {
-                            document.write("Good Afternoon<span>!</span>");
-                        } else {
-                            document.write("Good Evening<span>!</span>");
-                        }
-                        document.write("</h1>");
-                    </script>
-                </div>
-            </div>
-        </div>
-    </section>
-
-<!-- 
-    <section class="products">
-        <div class="container" data-aos="fade-down">
-            <div class="section-title">
-                <h2>Products</h2>
-                <p>Available products</p>
-            </div>
-
             <div class="row">
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-                    <div class="icon-box">
-                        <div class="icon"></div>
-                        <h4><a href="">Lorem Ipsum</a></h4>
-                        <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
+                <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                    <div class="card card-signin my-5">
+                        <div class="card-body">
+
+                        <h5 class="card-title text-center">Enter Product ID</h5>
+
+                            <form class="form-signin" action="admin\admin_update.php" method="GET">
+
+                                <div class="form-label-group">
+                                    <input type="text" id="inputPassword" class="form-control" placeholder="Product ID" name="pid" required>
+                                    <label for="inputPassword">Product ID</label>
+                                </div>
+
+                                <button class="btn btn-lg btn-block text-uppercase" name="submit" style="background-color: #000; color: #fff;" type="submit">Submit</button>
+                                <hr class="my-4">
+                            </form>
+
+                        </div>
                     </div>
                 </div>
-
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
-                    <div class="icon-box">
-                        <div class="icon"></div>
-                        <h4><a href="">Sed ut perspiciatis</a></h4>
-                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
-                    <div class="icon-box">
-                        <div class="icon"></div>
-                        <h4><a href="">Magni Dolores</a></h4>
-                        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-                    <div class="icon-box">
-                        <div class="icon"></div>
-                        <h4><a href="">Nemo Enim</a></h4>
-                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-                    <div class="icon-box">
-                        <div class="icon"></div>
-                        <h4><a href="">Dele cardo</a></h4>
-                        <p>Quis consequatur saepe eligendi voluptatem consequatur dolor consequuntur</p>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-                    <div class="icon-box">
-                        <div class="icon"></div>
-                        <h4><a href="">Divera don</a></h4>
-                        <p>Modi nostrum vel laborum. Porro fugit error sit minus sapiente sit aspernatur</p>
-                    </div>
-                </div>
-
             </div>
-
         </div>
-    </section> 
--->
+    </div>
 
-    <footer id="footer">
+    <footer id="footer" style="width: 100%;">
         <div class="footer-top">
             <div class="container">
                 <div class="row justify-content-center">
@@ -207,15 +141,33 @@ require "../_headers/functions.php";
     <script src="../assets/js/main.js"></script>
 </body>
 
-
 </html>
 
-<?php
 
-} else {
+    <div class="log_main">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                    <div class="card card-signin my-5">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Enter Product ID</h5>
 
-    header('location:admin_login.php');
+                            <form class="form-signin" action="admin\admin_update.php" method="GET">
 
-}
+                                <div class="form-label-group">
+                                    <input type="text" id="inputPassword" class="form-control" placeholder="Product ID" name="pid" required>
+                                    <label for="inputPassword">Product ID</label>
+                                </div>
 
-?>
+                                <button class="btn btn-lg btn-block text-uppercase" name="submit" style="background-color: #000; color: #fff;" type="submit">Submit</button>
+                                <hr class="my-4">
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    

@@ -1,36 +1,21 @@
-<?php 
-
-require "../_headers/functions.php";
-
-    session_start();
-
-    if (isset($_SESSION['ADID'])) {
-
-        if(!isset($_SESSION['ADBASICINFO'])) {
-
-            setBasicInfo($_SESSION['ADID'], false);
-
-        }
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Amart Admin</title>
+    <title>Amart Admin Electronics</title>
     <meta content="Amart, amart sales, amart india" name="description">
     <meta content="Amart, India, Sales, Refrigerator Sales, TV Sales, Hardware Sales" name="keywords">
     <link href="../assets/img/a.png" rel="icon">
     <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-    <link href="../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
     <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="../assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+    <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
     <link href="../assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="../assets/vendor/venobox/venobox.css" rel="stylesheet">
-    <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
     <link href="../assets/vendor/aos/aos.css" rel="stylesheet">
     <link href="../assets/css/style.css" rel="stylesheet">
 
@@ -39,7 +24,7 @@ require "../_headers/functions.php";
 <body>
     <header id="header" class="fixed-top ">
         <div class="container d-flex align-items-center justify-content-between">
-            <h1 class="logo"><a href="index.html">Amart<span style="font-size: medium;">ADMIN</span></a></h1>
+            <h1 class="logo"><a href="admin_after_login.html">Amart<span style="font-size: medium;">ADMIN</span></a></h1>
             <nav class="nav-bar d-none d-lg-block">
                 <ul>
                     <li><a href="admin_add.html">Add Product</a></li>
@@ -53,109 +38,85 @@ require "../_headers/functions.php";
                     <li class="drop-down">
                         <a></a>
                         <ul>
-                            <li><a href="admin_add.html">Add Product</a></li>
-                            <li><a href="admin_delete.html">Delete Product</a></li>
-                            <li><a href="admin_update.html">Update Product</a></li>
-                            <li><a href="admin_all.html">Check Products</a></li>
+                            <li class="active"><a href="index.html">Home</a></li>
+                            <li class="drop-down"><a>Shop by Category</a>
+                                <ul>
+                                    <li><a href="admin_add.html">Add Product</a></li>
+                                    <li><a href="admin_delete.html">Delete Product</a></li>
+                                    <li><a href="admin_update.html">Update Product</a></li>
+                                    <li><a href="admin_all.html">Check Products</a></li>
+                                </ul>
                         </ul>
-                    </li>
+                        </li>
                 </ul>
             </nav>
             <div class="dropdown login-btn">
-                <p style="margin-bottom: 0px;"> <?php echo $_SESSION['ADBASICINFO']['AD_FIRSTNAME'] ?> </p>
+                <p style="margin-bottom: 0px;">NAME</p>
                 <div class="dropdown-content">
-                    <a href="admin_index.php">Home</a>
-                    <a href="admin_details.php">My Account</a>
-                    <a href="../_headers/logout.php">Log Out</a>
+                    <a href="admin_after_login.html">Home</a>
+                    <a href="admin_details.html">My Account</a>
+                    <a href="admin_home.html">Log Out</a>
                 </div>
             </div>
         </div>
     </header>
 
-    <section id="admin_home" class="d-flex align-items-center justify-content-center">
+    <section id="ad_home" class="d-flex align-items-center justify-content-center">
         <div class="container">
             <div class="row justify-content-center" data-aos="fade-down" data-aos-delay="150">
-                <div class="col-xl-6 col-lg-8">
-                    <script type="text/javascript">
-                        document.write("<h1>");
-                        var day = new Date();
-                        var hr = day.getHours();
-                        if (hr >= 0 && hr < 12) {
-                            document.write("Good Morning<span>!</span>");
-                        } else if (hr >= 12 && hr <= 17) {
-                            document.write("Good Afternoon<span>!</span>");
-                        } else {
-                            document.write("Good Evening<span>!</span>");
-                        }
-                        document.write("</h1>");
-                    </script>
+                <div>
+                    <h1>Update Products<span>.</span></h1>
                 </div>
             </div>
         </div>
     </section>
 
-<!-- 
+
     <section class="products">
-        <div class="container" data-aos="fade-down">
+        <div class="container">
             <div class="section-title">
-                <h2>Products</h2>
-                <p>Available products</p>
+                <h2>Electronics</h2>
+                <p>Update products</p>
             </div>
-
-            <div class="row">
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-                    <div class="icon-box">
-                        <div class="icon"></div>
-                        <h4><a href="">Lorem Ipsum</a></h4>
-                        <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
-                    </div>
+            <form style="margin-top: -2%; margin-bottom: 4%;">
+                <div class="form-group">
+                    <label><b>Product Name</b></label>
+                    <input type="text" style="width: 40%;" class="form-control" id="productName" placeholder="Enter Product Name">
                 </div>
-
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
-                    <div class="icon-box">
-                        <div class="icon"></div>
-                        <h4><a href="">Sed ut perspiciatis</a></h4>
-                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
-                    </div>
+                <div class="form-group">
+                    <label><b>Product Type</b></label>
+                    <select id="productType" style="width: 40%;" class="form-control">
+                      <option selected>Choose...</option>
+                      <option>Electronics</option>
+                      <option>Hardware</option>
+                      <option>Living Room</option>
+                      <option>Kitchen Appliances</option>
+                    </select>
                 </div>
-
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
-                    <div class="icon-box">
-                        <div class="icon"></div>
-                        <h4><a href="">Magni Dolores</a></h4>
-                        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
-                    </div>
+                <div class="form-group">
+                    <label><b>Product ID</b></label>
+                    <input type="text" style="width: 40%;" class="form-control" id="productID" placeholder="Enter Product ID">
                 </div>
-
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-                    <div class="icon-box">
-                        <div class="icon"></div>
-                        <h4><a href="">Nemo Enim</a></h4>
-                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
-                    </div>
+                <div class="form-group">
+                    <label><b>Product Price</b></label>
+                    <input type="number" style="width: 40%;" class="form-control" id="productPrice" placeholder="Enter Product Price">
                 </div>
-
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-                    <div class="icon-box">
-                        <div class="icon"></div>
-                        <h4><a href="">Dele cardo</a></h4>
-                        <p>Quis consequatur saepe eligendi voluptatem consequatur dolor consequuntur</p>
-                    </div>
+                <div class="form-group">
+                    <label><b>Product Offers</b></label>
+                    <input type="text" style="width: 40%;" class="form-control" id="productOffers" placeholder="Enter Product Offers">
                 </div>
-
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-                    <div class="icon-box">
-                        <div class="icon"></div>
-                        <h4><a href="">Divera don</a></h4>
-                        <p>Modi nostrum vel laborum. Porro fugit error sit minus sapiente sit aspernatur</p>
-                    </div>
+                <div class="form-group">
+                    <label><b>Product Description</b></label>
+                    <textarea class="form-control" style="width: 80%;" id="productDescription" placeholder="Enter Product Description" rows="3"></textarea>
                 </div>
-
-            </div>
-
+                <div class="form-group">
+                    <label><b>Upload Product Image</b></label>
+                    <input type="file" style="width: 40%;" class="form-control-file" id="productImage" width="50" height="50">
+                </div>
+                <button type="submit" class="btn btn-primary admin_but">Update Product</button>
+            </form>
         </div>
-    </section> 
--->
+    </section>
 
     <footer id="footer">
         <div class="footer-top">
@@ -207,15 +168,4 @@ require "../_headers/functions.php";
     <script src="../assets/js/main.js"></script>
 </body>
 
-
 </html>
-
-<?php
-
-} else {
-
-    header('location:admin_login.php');
-
-}
-
-?>

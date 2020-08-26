@@ -188,7 +188,7 @@ if (isset($_SESSION['ADID'])) {
                 <div class="dropdown-content">
                     <a href="admin_index.php">Home</a>
                     <a href="admin_details.php">My Account</a>
-                    <a href="../_headers/logout.php?LD">Log Out</a>
+                    <a href="../_headers/logout.php">Log Out</a>
                 </div>
             </div>
         </div>

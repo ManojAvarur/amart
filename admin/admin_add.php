@@ -82,6 +82,7 @@ if (isset($_SESSION['ADID'])) {
                 
                         $loc = substr($loc, 3);
 
+                        $check = true;
                         // $sql  = "SELECT PRD_ID FROM PRODUCT WHERE PRD_NAME = '$pd_name' AND PRD_CAT_ID = $pd_cat ";
                         // $sql .= "AND PRD_DETAILS = '$pd_desc' AND PRD_PRICE = $pd_price AND PRD_OFFERS = '$pd_offers'; ";
 
@@ -96,11 +97,13 @@ if (isset($_SESSION['ADID'])) {
 
                             if( !$query ) {
 
+                                $check = false;
+
                                 echo "<script> alert(\"Some error occured during execution of the query! \\n Check with the database for unknown entries\")</script>";
                                 // die(mysqli_error($con));
 
                             }
-
+                            
                     } else {
 
                             echo "<script>
@@ -111,6 +114,11 @@ if (isset($_SESSION['ADID'])) {
 
                     }
                 }
+
+                
+                echo "<script>
+                            alert( 'Product inserted successfully!!' );
+                    </script>";
 
         } else {
 

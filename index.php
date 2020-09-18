@@ -162,7 +162,8 @@
                 <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
                     <div class="icon-box">
                         <!-- <div class="icon"  style='background-image: url("https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png");'>  </div>  -->
-                        <div class="icon"  style='background-image: url("<?php  echo $rows['IMG_PATH']; ?>");'>  </div>
+                        <!-- <div class="icon"  style='background-image: url("<?php  echo $rows['IMG_PATH']; ?>");'>  </div> -->
+                        <div class="icon"  > <img src="<?php  echo $rows['IMG_PATH']; ?>" alt="" width= "250" height= "250">  </div>
                         <h4><a href=""><?php  echo $rows['PRD_NAME']; ?></a></h4>
                         <p><?php echo $rows['PRD_DETAILS']; ?></p>
                     </div>

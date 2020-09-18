@@ -121,3 +121,33 @@ function echoCategories(){
     }
 
 }
+
+
+function dataDelete( $a1, $a2 ){
+
+    global $con;
+
+    $sql = "DELETE FROM PRODUCT WHERE PRD_ID = '". $a1[0] ."' ";
+
+   if( !mysqli_query( $con, $sql ) ){
+    echo "<script> alert(' Deletion of product failed. Try Updating the product ') </script>";
+   }
+
+   for( $i = 1; $i < count($a1); $i++ ){
+
+        $sql = "DELETE FROM PRD_IMAGE WHERE IMG_PATH = '". $a1[$i] ."' ";
+
+        if( !mysqli_query( $con, $sql ) ){
+            echo "<script> alert(' Deletion of Image failed. Try Updating the product ') </script>";
+           }
+
+   }
+
+   for( $i = 0; $i < count($a2); $i++ ){
+
+    unlink($a2[$i]);
+
+   }
+
+
+}

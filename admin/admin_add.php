@@ -31,14 +31,19 @@ if (isset($_SESSION['ADID'])) {
         $pd_offers = mysqli_escape_string( $con, $_POST['offers'] );
 
         $sql  = "INSERT INTO PRODUCT ( PRD_ID, PRD_CAT_ID, PRD_NAME, PRD_DETAILS, PRD_PRICE, PRD_OFFERS )  ";
-        $sql .= "VALUES ( $pd_id, $pd_cat, '$pd_name', '$pd_desc', $pd_price, '$pd_offers' ); ";
+        $sql .= "VALUES ( '$pd_id', $pd_cat, '$pd_name', '$pd_desc', $pd_price, '$pd_offers' ); ";
+
+        $DbIds = array($pd_id);
+        $upLoc = array();
+
+        // die($sql)  
 
         // ----------------------------------------Uploading image into image table -----------------------------------------
 
         if( mysqli_query( $con, $sql ) ) {            
             
                 $files = $_FILES['image'];
-
+            // die(mysqli_error($con)."    d");
             // Check image type
 
                 for( $i = 0 ; $i < count( $files['name'] ) ; $i++ ){
@@ -79,6 +84,8 @@ if (isset($_SESSION['ADID'])) {
 
                 // Moving the image
                     if( move_uploaded_file( $files['tmp_name'][$i], $loc ) ) {
+
+                        array_push($upLoc, $loc);
                 
                         $loc = substr($loc, 3);
 
@@ -88,28 +95,47 @@ if (isset($_SESSION['ADID'])) {
 
                         // if( $rows = mysqli_fetch_assoc( mysqli_query( $con, $sql ) ) ) {       Obtaining PRD_ID
 
-                            $sql  = "INSERT INTO PRD_IMAGE (PRD_ID, IMG_PATH) VALUES ";
-                            $sql .= "(" . $pd_id . ", '" . mysqli_escape_string($con, $loc) . "'); ";
+                            $sql  = "INSERT INTO PRD_IMAGE (IMG_PRD_ID, IMG_PATH) VALUES ";
+                            $sql .= "('" . $pd_id . "', '" . mysqli_escape_string($con, $loc) . "'); ";
 
                             $query = mysqli_query( $con, $sql );
 
-                            // die( $sql ); 
+                            // echo( $sql ); 
+
+                            // die(mysqli_error($con)."");
 
                             if( !$query ) {
 
                                 $check = false;
 
-                                echo "<script> alert(\"Some error occured during execution of the query! \\n Check with the database for unknown entries\")</script>";
+                                // echo "<script> 
+                                // alert(\"Some error occured during execution of the query! \\n Check with the database (AMART.PRD_IMAGE) for unknown entries\")
+                                // </script>";
                                 // die(mysqli_error($con));
+                                dataDelete($DbIds, $upLoc);
 
-                            }
+                                 
+                                die( "<script>
+                                                alert('An error ocurred while uploading \\n Try again asdasdadasdasdasd');
+                                                window.history.go(-1);
+                                    </script>");
+
+
+                            } else 
+
+                            array_push($DbIds, $loc);
                             
                     } else {
 
-                            echo "<script>
-                                            alert('An error ocurred while uploading image : ". $files['name'] ."');
-                                </script>";
+                            // echo "<script>
+                            //                 alert('An error ocurred while uploading image : ". $files['name'] ."');
+                            //     </script>";
+                            dataDelete($DbIds, $upLoc);
 
+                            die( "<script>
+                                            alert('An error ocurred while uploading \\n Try again ');
+                                            window.history.go(-1);
+                                </script>");
 
 
                     }

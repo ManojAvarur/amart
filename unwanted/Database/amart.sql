@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 13, 2020 at 08:52 PM
--- Server version: 10.4.13-MariaDB
--- PHP Version: 7.4.8
+-- Generation Time: Sep 18, 2020 at 09:34 PM
+-- Server version: 10.4.14-MariaDB
+-- PHP Version: 7.4.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,8 +28,8 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `address` (
-  `AD_ID` int(11) NOT NULL,
-  `AD_LOGIN_ID` varchar(50) DEFAULT NULL,
+  `ADD_ID` int(11) NOT NULL,
+  `ADD_LOGIN_ID` varchar(50) DEFAULT NULL,
   `ADDRESS` varchar(255) DEFAULT NULL,
   `PINCODE` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -48,6 +48,14 @@ CREATE TABLE `admin` (
   `AD_LASTNAME` char(100) DEFAULT NULL,
   `AD_PHNO` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`AD_ID`, `AD_EMAIL_ID`, `AD_PASSWORD`, `AD_FIRSTNAME`, `AD_LASTNAME`, `AD_PHNO`) VALUES
+('100001', 's@s', '6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918', 'S', 'S', 123456789),
+('4', NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -72,6 +80,16 @@ CREATE TABLE `category` (
   `CAT_NAME` char(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`CAT_ID`, `CAT_NAME`) VALUES
+(2001, 'Electronics'),
+(2002, 'Furniture'),
+(2003, 'Kitchen'),
+(2004, 'Bathroom');
+
 -- --------------------------------------------------------
 
 --
@@ -83,6 +101,13 @@ CREATE TABLE `cookie` (
   `CK_LOGIN_ID` varchar(50) DEFAULT NULL,
   `CK_VALUE` varchar(300) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `cookie`
+--
+
+INSERT INTO `cookie` (`CK_ID`, `CK_LOGIN_ID`, `CK_VALUE`) VALUES
+(1, '9ab81b41c023b9cdacb228111bb88fba', '3T10Z8d3334965d0ffa935af70b31d7475ff4ozMiOPOUKsEy8xLA0A5SumftkHNycXGDgCoOdtugJdAHP6HwZ4u7rhvbygJ91xh3w5QvtpnYR1ZhipjQvQzr7FeZ7gNP5tmMoN4MWjYF0sj8rNB3Vp5lRhLsk1yMMkk1O2B7bQ5HVMCG9Peaf77fKmLMvQSygwR3msId599jg5Um3eGneJFPKOdZX5xGtXadGbVxQeuQUZlqQ5NaJkYTAxSBeHDH9QB8nmjCEAQKPv6');
 
 -- --------------------------------------------------------
 
@@ -97,6 +122,13 @@ CREATE TABLE `login` (
   `USER_FNAME` varchar(100) DEFAULT NULL,
   `USER_PHNO` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `login`
+--
+
+INSERT INTO `login` (`LOGIN_ID`, `EMAIL_ID`, `USER_PASSWORD`, `USER_FNAME`, `USER_PHNO`) VALUES
+('9ab81b41c023b9cdacb228111bb88fba', 'manojavarur@gmail.com', '6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918', 'Manoj A M', 123456789);
 
 -- --------------------------------------------------------
 
@@ -118,9 +150,17 @@ CREATE TABLE `orders` (
 --
 
 CREATE TABLE `prd_image` (
-  `IMG_ID` int(11) NOT NULL,
+  `IMG_PRD_ID` varchar(50) DEFAULT NULL,
   `IMG_PATH` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `prd_image`
+--
+
+INSERT INTO `prd_image` (`IMG_PRD_ID`, `IMG_PATH`) VALUES
+('EL-ST-123', 'Products/Images/Something-94493832710.png'),
+('EL-ST-123', 'Products/Images/Something-94493832710-0.png');
 
 -- --------------------------------------------------------
 
@@ -133,9 +173,16 @@ CREATE TABLE `product` (
   `PRD_ID` varchar(50) NOT NULL,
   `PRD_NAME` varchar(100) DEFAULT NULL,
   `PRD_DETAILS` varchar(255) DEFAULT NULL,
-  `PRD_PRICE` float DEFAULT NULL,
-  `PRD_IMG_ID` int(11) DEFAULT NULL
+  `PRD_OFFERS` varchar(255) DEFAULT NULL,
+  `PRD_PRICE` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`PRD_CAT_ID`, `PRD_ID`, `PRD_NAME`, `PRD_DETAILS`, `PRD_OFFERS`, `PRD_PRICE`) VALUES
+(2001, 'EL-ST-123', 'Something', 'Google It!', 'Fuck Off', 12);
 
 -- --------------------------------------------------------
 
@@ -157,8 +204,8 @@ CREATE TABLE `total_amt` (
 -- Indexes for table `address`
 --
 ALTER TABLE `address`
-  ADD PRIMARY KEY (`AD_ID`),
-  ADD KEY `AD_LOGIN_ID` (`AD_LOGIN_ID`);
+  ADD PRIMARY KEY (`ADD_ID`),
+  ADD KEY `ADD_LOGIN_ID` (`ADD_LOGIN_ID`);
 
 --
 -- Indexes for table `admin`
@@ -185,7 +232,7 @@ ALTER TABLE `category`
 --
 ALTER TABLE `cookie`
   ADD PRIMARY KEY (`CK_ID`),
-  ADD KEY `COK_LOGIN_ID` (`CK_LOGIN_ID`);
+  ADD KEY `CK_LOGIN_ID` (`CK_LOGIN_ID`);
 
 --
 -- Indexes for table `login`
@@ -206,15 +253,14 @@ ALTER TABLE `orders`
 -- Indexes for table `prd_image`
 --
 ALTER TABLE `prd_image`
-  ADD PRIMARY KEY (`IMG_ID`);
+  ADD KEY `IMG_PRD_ID` (`IMG_PRD_ID`);
 
 --
 -- Indexes for table `product`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`PRD_ID`),
-  ADD KEY `PRD_CAT_ID` (`PRD_CAT_ID`),
-  ADD KEY `PRD_IMG_ID` (`PRD_IMG_ID`);
+  ADD KEY `PRD_CAT_ID` (`PRD_CAT_ID`);
 
 --
 -- Indexes for table `total_amt`
@@ -231,37 +277,25 @@ ALTER TABLE `total_amt`
 -- AUTO_INCREMENT for table `address`
 --
 ALTER TABLE `address`
-  MODIFY `AD_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ADD_ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `CAT_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `CAT_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2005;
 
 --
 -- AUTO_INCREMENT for table `cookie`
 --
 ALTER TABLE `cookie`
-  MODIFY `CK_ID` bigint(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `CK_ID` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
   MODIFY `ORD_ID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `prd_image`
---
-ALTER TABLE `prd_image`
-  MODIFY `IMG_ID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `product`
---
-ALTER TABLE `product`
-  MODIFY `PRD_ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `total_amt`
@@ -277,7 +311,7 @@ ALTER TABLE `total_amt`
 -- Constraints for table `address`
 --
 ALTER TABLE `address`
-  ADD CONSTRAINT `address_ibfk_1` FOREIGN KEY (`AD_LOGIN_ID`) REFERENCES `login` (`LOGIN_ID`);
+  ADD CONSTRAINT `address_ibfk_1` FOREIGN KEY (`ADD_LOGIN_ID`) REFERENCES `login` (`LOGIN_ID`);
 
 --
 -- Constraints for table `cart`
@@ -300,11 +334,16 @@ ALTER TABLE `orders`
   ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`ORD_PRD_ID`) REFERENCES `product` (`PRD_ID`);
 
 --
+-- Constraints for table `prd_image`
+--
+ALTER TABLE `prd_image`
+  ADD CONSTRAINT `prd_image_ibfk_1` FOREIGN KEY (`IMG_PRD_ID`) REFERENCES `product` (`PRD_ID`);
+
+--
 -- Constraints for table `product`
 --
 ALTER TABLE `product`
-  ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`PRD_CAT_ID`) REFERENCES `category` (`CAT_ID`),
-  ADD CONSTRAINT `product_ibfk_2` FOREIGN KEY (`PRD_IMG_ID`) REFERENCES `prd_image` (`IMG_ID`);
+  ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`PRD_CAT_ID`) REFERENCES `category` (`CAT_ID`);
 
 --
 -- Constraints for table `total_amt`

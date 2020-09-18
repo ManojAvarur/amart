@@ -19,9 +19,13 @@
 <?php 
     require "_headers/connection.php";
 
-    $select = "SELECT P.PRD_NAME, P.PRD_DETAILS, I.IMG_PATH FROM PRD_IMAGE I, PRODUCT P WHERE P.PRD_ID = I.PRD_ID; " ;
+    $select = "SELECT P.PRD_NAME, P.PRD_DETAILS, I.IMG_PATH FROM PRD_IMAGE I, PRODUCT P WHERE P.PRD_ID = I.IMG_PRD_ID GROUP BY P.PRD_ID; " ;
 
     $qselect = mysqli_query($con, $select);
+
+    // die($select);
+    
+    // die(mysqli_error($con)."");
     
 ?>
 

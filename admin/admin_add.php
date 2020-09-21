@@ -43,6 +43,7 @@ if (isset($_SESSION['ADID'])) {
         if( mysqli_query( $con, $sql ) ) {            
             
                 $files = $_FILES['image'];
+                // die(isset($_FILES['image'])."");
             // die(mysqli_error($con)."    d");
             // Check image type
 
@@ -50,9 +51,11 @@ if (isset($_SESSION['ADID'])) {
 
                     // echo $_FILES['image']['name'][$i]."<br>";
                     if( ( $files['error'][$i] > 0 ) || ( ! in_array( $files['type'][$i] , ["image/jpeg", "image/png", "image/jfif"] ) ) ) {
+                        
+                        dataDelete($DbIds, $upLoc);
                         echo "<script>
                                         alert('An error ocurred when uploading or File type not supported');
-                                        window.location.href;
+                                        window.history.go(-1);
                             </script>";
 
                         // die( mysqli_error( $con ) );   
@@ -144,6 +147,9 @@ if (isset($_SESSION['ADID'])) {
                 
                 echo "<script>
                             alert( 'Product inserted successfully!!' );
+                            if( window.history.replaceState ){
+                                window.history.replaceState( null, null, window.reload );
+                            }
                     </script>";
 
         } else {
@@ -208,7 +214,7 @@ if (isset($_SESSION['ADID'])) {
                             <li class="active"><a href="index.html">Home</a></li>
                             <li class="drop-down"><a>Shop by Category</a>
                                 <ul>
-                                    <li><a href="admin_add.html">Add Product</a></li>
+                                    <li><a href="admin_add.php">Add Product</a></li>
                                     <li><a href="admin_delete.html">Delete Product</a></li>
                                     <li><a href="admin_update.html">Update Product</a></li>
                                     <li><a href="admin_all.html">Check Products</a></li>

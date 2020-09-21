@@ -106,7 +106,7 @@ function mailing($email, $val){
 
 
 
-function echoCategories(){
+function echoCategories($check = 0, $escape = 0){
 
     global $con;
 
@@ -114,11 +114,17 @@ function echoCategories(){
 
     $sql = mysqli_query( $con, $sql );
 
-    while ( $row = mysqli_fetch_assoc( $sql )) {
+    
 
-        echo "<option value='" . $row['CAT_ID'] . "'> " . $row['CAT_NAME'] . " </option>";
-       
-    }
+        if($check){
+            while ( $row = mysqli_fetch_assoc( $sql )) {
+                if( $row['CAT_ID'] != $escape )
+                    echo "<option value='" . $row['CAT_ID'] . "'> " . $row['CAT_NAME'] . " </option>";
+            }
+        } else {
+            while ( $row = mysqli_fetch_assoc( $sql )) 
+                echo "<option value='" . $row['CAT_ID'] . "'> " . $row['CAT_NAME'] . " </option>";
+        }
 
 }
 

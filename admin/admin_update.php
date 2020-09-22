@@ -1,3 +1,102 @@
+<?php 
+session_start(); 
+
+if (isset( $_SESSION['ADID']) && isset( $_SESSION['prd'] ) )  {
+
+    if(!isset($_SESSION['ADBASICINFO'])) {
+
+        setBasicInfo($_SESSION['ADID'], false);
+
+    }
+
+    require "../_headers/connection.php";
+    require "../_headers/functions.php";
+    global $con;
+
+    if( isset( $_POST['submit'] ) ){
+        $pname = mysqli_escape_string($con, $_POST['pname']);
+        $cat = mysqli_escape_string($con, $_POST['category']);
+        $price = mysqli_escape_string($con, $_POST['price']);
+        $offers = mysqli_escape_string($con, $_POST['offers']);
+        $des = mysqli_escape_string($con, $_POST['des']);
+        $pid =  mysqli_escape_string($con, $_POST['pid']);
+
+        $sql = "UPDATE product SET ";
+        $sql .= "PRD_CAT_ID = " . $cat . ", ";
+        $sql .= "PRD_NAME = '" . $pname . "', ";
+        $sql .= "PRD_DETAILS = '" . $des . "', ";
+        $sql .= "PRD_OFFERS = '" . $offers . "', ";
+        $sql .= "PRD_PRICE = " . $price . " ";
+        $sql .= "WHERE PRD_ID = '" . $pid . "'; ";
+
+        // die($sql."");
+        if( ! mysqli_query( $con, $sql ) ){
+            echo "<script> 
+                    alert('Updation failed. \\n Please try again!');
+                    window.history.go(-1);
+                </script>";
+        } else {
+
+            // print_r( $_FILES['file'] );
+            // die();
+            if( $_FILES['file']['size'] > 0 ){
+
+                $files = $_FILES['file'];
+
+                // for( $i = 0 ; $i < count( $files['name'] ) ; $i++ ){
+
+                    if( ( $files['error'] > 0 ) || ( ! in_array( $files['type'] , ["image/jpeg", "image/png", "image/jfif"] ) ) ) {
+                        
+                        echo "<script>
+                                        alert('An error ocurred when uploading or File type not supported');
+                                        window.history.go(-1);
+                            </script>";
+
+                        // die( mysqli_error( $con ) );   
+                    }
+        
+                // }
+
+                // for( $i = 0 ; $i < count( $files['name'] ) ; $i++ ){
+
+                    // die("../".$_SESSION['prd'][0][6] );
+                    unlink( "../".$_SESSION['prd'][0][6] );
+
+                    if( ! move_uploaded_file( $files['tmp_name'], "../".$_SESSION['prd'][0][6] ) ) {
+
+                        echo "<script>
+                                        alert('An error ocurred while moving the file please try uploading again!   ');
+                                        window.history.go(-1);
+                            </script>";
+
+                    }
+
+                    unset( $_SESSION['prd'] );
+
+
+                        echo "<script> 
+                                alert('Updation successfull!');
+                                if( window.history.replaceState ){
+                                    window.history.replaceState( null, null, location.href='admin_index.php' );
+                                }
+                            </script>";
+
+                    // header('location:admin_index.php');
+
+                    
+                    
+                // }
+
+            }
+
+        }
+    }
+
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,12 +123,12 @@
 <body>
     <header id="header" class="fixed-top ">
         <div class="container d-flex align-items-center justify-content-between">
-            <h1 class="logo"><a href="admin_after_login.html">Amart<span style="font-size: medium;">ADMIN</span></a></h1>
+            <h1 class="logo"><a href="index.html">Amart<span style="font-size: medium;">ADMIN</span></a></h1>
             <nav class="nav-bar d-none d-lg-block">
                 <ul>
-                    <li><a href="admin_add.html">Add Product</a></li>
-                    <li><a href="admin_delete.html">Delete Product</a></li>
-                    <li><a href="admin_update.html">Update Product</a></li>
+                    <li><a href="admin_add.php">Add Product</a></li>
+                    <li><a href="product_id_enter.php?location=delete">Delete Product</a></li>
+                    <li><a href="product_id_enter.php?location=update">Update Product</a></li>
                     <li><a href="admin_all.html">Check Products</a></li>
                 </ul>
             </nav>
@@ -38,28 +137,25 @@
                     <li class="drop-down">
                         <a></a>
                         <ul>
-                            <li class="active"><a href="index.html">Home</a></li>
-                            <li class="drop-down"><a>Shop by Category</a>
-                                <ul>
-                                    <li><a href="admin_add.html">Add Product</a></li>
-                                    <li><a href="admin_delete.html">Delete Product</a></li>
-                                    <li><a href="admin_update.html">Update Product</a></li>
-                                    <li><a href="admin_all.html">Check Products</a></li>
-                                </ul>
+                        <li><a href="admin_add.php">Add Product</a></li>
+                        <li><a href="product_id_enter.php?location=delete">Delete Product</a></li>
+                        <li><a href="product_id_enter.php?location=update">Update Product</a></li>
+                        <li><a href="admin_all.html">Check Products</a></li>
                         </ul>
-                        </li>
+                    </li>
                 </ul>
             </nav>
             <div class="dropdown login-btn">
-                <p style="margin-bottom: 0px;">NAME</p>
+                <p style="margin-bottom: 0px;"> <?php echo $_SESSION['ADBASICINFO']['AD_FIRSTNAME'] ?> </p>
                 <div class="dropdown-content">
-                    <a href="admin_after_login.html">Home</a>
-                    <a href="admin_details.html">My Account</a>
-                    <a href="admin_home.html">Log Out</a>
+                    <a href="admin_index.php">Home</a>
+                    <a href="admin_details.php">My Account</a>
+                    <a href="../_headers/logout.php">Log Out</a>
                 </div>
             </div>
         </div>
     </header>
+
 
     <section id="ad_home" class="d-flex align-items-center justify-content-center">
         <div class="container">
@@ -75,45 +171,46 @@
     <section class="products">
         <div class="container">
             <div class="section-title">
-                <h2>Electronics</h2>
+                <h2><?php echo $_SESSION['prd'][0][7] ?></h2>
                 <p>Update products</p>
             </div>
-            <form style="margin-top: -2%; margin-bottom: 4%;">
+            <form style="margin-top: -2%; margin-bottom: 4%;" action="admin_update.php" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                     <label><b>Product Name</b></label>
-                    <input type="text" style="width: 40%;" class="form-control" id="productName" placeholder="Enter Product Name">
+                    <input type="text" name="pname" value="<?php echo $_SESSION['prd'][0][2] ?>" style="width: 40%;" class="form-control" id="productName" placeholder="Enter Product Name" required>
                 </div>
+
                 <div class="form-group">
                     <label><b>Product Type</b></label>
-                    <select id="productType" style="width: 40%;" class="form-control">
-                      <option selected>Choose...</option>
-                      <option>Electronics</option>
-                      <option>Hardware</option>
-                      <option>Living Room</option>
-                      <option>Kitchen Appliances</option>
+                    <select id="productType" name="category" style="width: 40%;" class="form-control" required>
+                      <option selected value="<?php echo $_SESSION['prd'][0][0] ?>"><?php echo $_SESSION['prd'][0][7] ?></option>
+                        <?php
+                                echoCategories(1, $_SESSION['prd'][0][0])
+                        ?>
                     </select>
                 </div>
+
                 <div class="form-group">
                     <label><b>Product ID</b></label>
-                    <input type="text" style="width: 40%;" class="form-control" id="productID" placeholder="Enter Product ID">
+                    <input type="text" name="pid" value="<?php echo $_SESSION['prd'][0][1] ?>" style="width: 40%;" class="form-control" id="productID" placeholder="Enter Product ID" readonly required>
                 </div>
                 <div class="form-group">
                     <label><b>Product Price</b></label>
-                    <input type="number" style="width: 40%;" class="form-control" id="productPrice" placeholder="Enter Product Price">
+                    <input type="number" name="price" value="<?php echo $_SESSION['prd'][0][5] ?>" style="width: 40%;" class="form-control" id="productPrice" placeholder="Enter Product Price" required>
                 </div>
                 <div class="form-group">
                     <label><b>Product Offers</b></label>
-                    <input type="text" style="width: 40%;" class="form-control" id="productOffers" placeholder="Enter Product Offers">
+                    <input type="text" name="offers" value="<?php echo $_SESSION['prd'][0][4] ?>" style="width: 40%;" class="form-control" id="productOffers" placeholder="Enter Product Offers" required>
                 </div>
                 <div class="form-group">
                     <label><b>Product Description</b></label>
-                    <textarea class="form-control" style="width: 80%;" id="productDescription" placeholder="Enter Product Description" rows="3"></textarea>
+                    <textarea class="form-control" name="des" style="width: 80%;" id="productDescription" placeholder="Enter Product Description" rows="3" required> <?php echo $_SESSION['prd'][0][3] ?> </textarea>
                 </div>
                 <div class="form-group">
                     <label><b>Upload Product Image</b></label>
-                    <input type="file" style="width: 40%;" class="form-control-file" id="productImage" width="50" height="50">
+                    <input type="file" name="file" style="width: 40%;" class="form-control-file" id="productImage" width="50" height="50">
                 </div>
-                <button type="submit" class="btn btn-primary admin_but">Update Product</button>
+                <button type="submit" name="submit" class="btn btn-primary admin_but">Update Product</button>
             </form>
         </div>
     </section>
@@ -169,3 +266,13 @@
 </body>
 
 </html>
+
+<?php
+
+} else {
+
+    header('location:admin_login.php');
+
+}
+
+?>

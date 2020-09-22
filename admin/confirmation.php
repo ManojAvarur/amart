@@ -84,6 +84,9 @@ if (isset( $_SESSION['ADID']) && isset( $_GET['location'] ) && in_array( $_GET['
                                     <p><strong>Product ID</strong></p>
                                 </div>
                             </div>
+                            
+                            <span id="spnote" style="color: red; flex-basis: 100%; height: 0;"></span>
+
                             <div style="margin-top: 8%; margin-left: 5%;">
                                 <button type="button" class="btn btn-success" onclick="goForword()">Yes</button>
                                 <button type="button" class="btn btn-dark" onclick="goBack()">No</button></div>
@@ -143,15 +146,24 @@ if (isset( $_SESSION['ADID']) && isset( $_GET['location'] ) && in_array( $_GET['
     <script src="../assets/vendor/aos/aos.js"></script>
     <script src="../assets/js/main.js"></script>
     <script>
-        function goForword(){
-            $val = "<?php echo $_GET['location'] ?>";
+        $val = "<?php echo $_GET['location'] ?>";
+        
+        function goForword(){       
             if( $val === "update" ){
                 window.location.href='admin_update.php';
             } else if( $val === "delete" ) {
-                window.location.href='admin_delete.php';
-            }
                 
-        }
+                window.location.href='admin_delete.php';
+            }    
+        }  
+
+        $(function () {
+            if( $val === "delete" ) {
+                document.getElementById("spnote").innerHTML = "*<b>Note:</b> This product will be permanently deleted!";
+            }
+        } );
+
+
     </script>
 </body>
 

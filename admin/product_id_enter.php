@@ -24,6 +24,8 @@ if (isset( $_SESSION['ADID']) && isset( $_GET['location'] ) && in_array( $_GET['
         $prd = "SELECT p.*, pi.IMG_PATH, c.CAT_NAME FROM product p, prd_image pi, category c ";
         $prd .= "WHERE p.PRD_ID = '" . $pid . "' AND p.PRD_ID = pi.IMG_PRD_ID AND c.CAT_ID = p.PRD_CAT_ID ";
         $prd .= "GROUP BY p.PRD_ID; ";
+
+        // die($prd);
     
         $prd = mysqli_query($con, $prd);
 

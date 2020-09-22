@@ -119,7 +119,7 @@ if (isset($_SESSION['ADID'])) {
 
                                  
                                 die( "<script>
-                                                alert('An error ocurred while uploading \\n Try again asdasdadasdasdasd');
+                                                alert('An error ocurred while uploading \\n Try again');
                                                 window.history.go(-1);
                                     </script>");
 
@@ -195,14 +195,14 @@ if (isset($_SESSION['ADID'])) {
 </head>
 
 <body>
-    <header id="header" class="fixed-top ">
+<header id="header" class="fixed-top ">
         <div class="container d-flex align-items-center justify-content-between">
-            <h1 class="logo"><a href="admin_after_login.html">Amart<span style="font-size: medium;">ADMIN</span></a></h1>
+            <h1 class="logo"><a href="index.html">Amart<span style="font-size: medium;">ADMIN</span></a></h1>
             <nav class="nav-bar d-none d-lg-block">
                 <ul>
                     <li><a href="admin_add.php">Add Product</a></li>
-                    <li><a href="admin_delete.html">Delete Product</a></li>
-                    <li><a href="admin_update.html">Update Product</a></li>
+                    <li><a href="product_id_enter.php?location=delete">Delete Product</a></li>
+                    <li><a href="product_id_enter.php?location=update">Update Product</a></li>
                     <li><a href="admin_all.html">Check Products</a></li>
                 </ul>
             </nav>
@@ -211,16 +211,12 @@ if (isset($_SESSION['ADID'])) {
                     <li class="drop-down">
                         <a></a>
                         <ul>
-                            <li class="active"><a href="index.html">Home</a></li>
-                            <li class="drop-down"><a>Shop by Category</a>
-                                <ul>
-                                    <li><a href="admin_add.php">Add Product</a></li>
-                                    <li><a href="admin_delete.html">Delete Product</a></li>
-                                    <li><a href="admin_update.html">Update Product</a></li>
-                                    <li><a href="admin_all.html">Check Products</a></li>
-                                </ul>
+                            <li><a href="admin_add.php">Add Product</a></li>
+                            <li><a href="admin_delete.html">Delete Product</a></li>
+                            <li><a href="admin_update.html">Update Product</a></li>
+                            <li><a href="admin_all.html">Check Products</a></li>
                         </ul>
-                        </li>
+                    </li>
                 </ul>
             </nav>
             <div class="dropdown login-btn">

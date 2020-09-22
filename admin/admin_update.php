@@ -60,7 +60,9 @@ if (isset( $_SESSION['ADID']) && isset( $_SESSION['prd'] ) )  {
                 // for( $i = 0 ; $i < count( $files['name'] ) ; $i++ ){
 
                     // die("../".$_SESSION['prd'][0][6] );
-                    unlink( "../".$_SESSION['prd'][0][6] );
+                    if( file_exists( "../".$_SESSION['prd'][0][6] ) ){
+                        unlink( "../".$_SESSION['prd'][0][6] );
+                    }
 
                     if( ! move_uploaded_file( $files['tmp_name'], "../".$_SESSION['prd'][0][6] ) ) {
 
@@ -71,15 +73,7 @@ if (isset( $_SESSION['ADID']) && isset( $_SESSION['prd'] ) )  {
 
                     }
 
-                    unset( $_SESSION['prd'] );
-
-
-                        echo "<script> 
-                                alert('Updation successfull!');
-                                if( window.history.replaceState ){
-                                    window.history.replaceState( null, null, location.href='admin_index.php' );
-                                }
-                            </script>";
+                    
 
                     // header('location:admin_index.php');
 
@@ -88,6 +82,16 @@ if (isset( $_SESSION['ADID']) && isset( $_SESSION['prd'] ) )  {
                 // }
 
             }
+
+            unset( $_SESSION['prd'] );
+
+
+            echo "<script> 
+                    alert('Updation successfull!');
+                    if( window.history.replaceState ){
+                        window.history.replaceState( null, null, location.href='admin_index.php' );
+                    }
+                </script>";
 
         }
     }

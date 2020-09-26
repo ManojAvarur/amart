@@ -80,12 +80,12 @@ function mailing($email, $val){
     $mail->isSMTP();                                       
     $mail->Host = 'smtp.gmail.com';  
     $mail->SMTPAuth = true;                               
-    $mail->Username = 'madevil.406@gmail.com';                 
-    $mail->Password = 'NS@200#LOVE';                           
+    $mail->Username = 'no.replay.amart@gmail.com';                 
+    $mail->Password = 'amart@486';                           
     $mail->SMTPSecure = 'tls';                            
     $mail->Port = 587;                                 
 
-    $mail->setFrom('no-replay@gmail.com', 'Amart');
+    $mail->setFrom('no.replay.amart@gmail.com', 'Amart');
 
     $mail->addAddress($email);    
 

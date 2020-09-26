@@ -135,7 +135,7 @@ if(isset($_POST['submit'])) {
                                 </div>
 
                                 <div class="form-label-group">
-                                    <input type="number" name="phone" id="inputNumber" class="form-control" placeholder="Contact Number" required autofocus onKeyup="checkform()">
+                                    <input type="tel" name="phone" id="inputNumber" class="form-control" placeholder="Contact Number" required autofocus onKeyup="checkform()">
                                     <label for="inputNumber">Contact Number</label>
                                 </div>
 

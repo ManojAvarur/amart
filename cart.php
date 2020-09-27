@@ -1,3 +1,37 @@
+<?php
+
+use function PHPSTORM_META\type;
+
+require "_headers/connection.php";
+    require "_headers/functions.php";
+
+    session_start();
+
+
+
+    if( isset( $_SESSION['ID'] ) ){
+
+        if (! isset( $_SESSION['BASICINFO'] ) ){
+            setBasicInfo( $_SESSION['ID'] );
+        }
+
+        global $con;
+
+        $sql = "SELECT P.PRD_NAME, P.PRD_ID, P.PRD_PRICE, C.CRT_QUANTITY, PI.IMG_PATH  ";
+        $sql .= "FROM product P, cart C, prd_image PI ";
+        $sql .= " WHERE C.CRT_LOGIN_ID = '" . $_SESSION['ID'] . "' AND ";
+        $sql .= "P.PRD_ID = C.CRT_PRD_ID AND ";
+        $sql .= "PI.IMG_PRD_ID = P.PRD_ID; ";      
+
+        // pNAME PID PRICE QUANTITY 
+        // die($sql." ");
+        $result = mysqli_query( $con, $sql );    
+        
+        $subTotal = 0;
+        // die(mysqli_error($con)."");
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,6 +53,7 @@
     <link href="assets/vendor/aos/aos.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/cartStyle.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 </head>
 
@@ -27,11 +62,11 @@
         <div class="container d-flex align-items-center justify-content-between">
             <h1 class="logo"><a href="index.html">Amart<span style="font-size: medium;">ADMIN</span></a></h1>
             <div class="dropdown login-btn">
-                <p style="margin-top: 0px;">NAME</p>
+                <p style="margin-top: 0px;"><?php echo $_SESSION['BASICINFO']['USER_FNAME'] ?></p>
                 <div class="dropdown-content">
-                    <a href="index.html">Home</a>
-                    <a href="admin_details.html">My Account</a>
-                    <a href="admin_home.html">Log Out</a>
+                    <a href="index.php">Home</a>
+                    <a href="#">My Account</a>
+                    <a href="_headers/logout.php">Log Out</a>
                 </div>
             </div>
         </div>
@@ -57,70 +92,70 @@
                     <li class="subtotal">Subtotal</li>
                 </ul>
             </div>
-            <div class="basket-product">
-                <div class="item">
-                    <div class="product-image">
-                        <img src="http://placehold.it/120x166" alt="Placholder Image 2" class="product-frame">
+            
+            <?php
+                while( $row = mysqli_fetch_assoc( $result ) ){
+            ?>
+                    <div class="basket-product">
+                        <div class="item">
+                            <div class="product-image">
+                                <?php echo "<img src='" . $row['IMG_PATH']  . "' alt='" . $row['PRD_NAME'] . "' class='product-frame'>" ?>
+                            </div>
+                            <div class="product-details">
+                                <!-- <h1><strong><span class="item-quantity">4</span> x abc</strong> test</h1> Price of the the product (multiply) by Quntity and total -->
+                                <?php echo "<p><strong>" . $row['PRD_NAME'] . "</strong></p>" ?><!-- Product Name-->
+                                <?php echo "<p>Product Code - " . $row['PRD_ID'] . "</p> " ?><!-- Product Code -->
+                            </div>
+                        </div>
+                        <div class="price"><?php echo $row['PRD_PRICE'] ?></div>
+                        <div class="quantity">
+                            <input type="number" value="<?php echo $row['CRT_QUANTITY'] ?>" min="1" max="5" class="quantity-field">
+                        </div>
+                        <?php  
+                            //echo"<br><br><br><br><br><br><br>    ". gettype((float)$row['PRD_PRICE']);
+                            //die(); 
+                            $price = (float)$row['PRD_PRICE'] ;
+                            $qunt = (int)$row['CRT_QUANTITY'] ;
+                            $prdTotal = $price * $qunt ;
+                            echo "<div class='subtotal'>" . $prdTotal . "</div>";
+                            $subTotal += $prdTotal;
+
+                        ?>
+                        
+                        
+                        
+                        <div class="remove">
+                            <button onclick="deleteThis('<?php echo $row['PRD_ID'] ?>')">Remove</button>
+                        </div>
                     </div>
-                    <div class="product-details">
-                        <h1><strong><span class="item-quantity">4</span> x abc</strong> test</h1>
-                        <p><strong>Navy, Size 18</strong></p>
-                        <p>Product Code - 232321939</p>
-                    </div>
-                </div>
-                <div class="price">26.00</div>
-                <div class="quantity">
-                    <input type="number" value="4" min="1" class="quantity-field">
-                </div>
-                <div class="subtotal">104.00</div>
-                <div class="remove">
-                    <button>Remove</button>
-                </div>
-            </div>
-            <div class="basket-product">
-                <div class="item">
-                    <div class="product-image">
-                        <img src="http://placehold.it/120x166" alt="Placholder Image 2" class="product-frame">
-                    </div>
-                    <div class="product-details">
-                        <h1><strong><span class="item-quantity">1</span> x def</strong> lorem ipsum</h1>
-                        <p><strong>Navy, Size 10</strong></p>
-                        <p>Product Code - 232321939</p>
-                    </div>
-                </div>
-                <div class="price">26.00</div>
-                <div class="quantity">
-                    <input type="number" value="1" min="1" max="5" class="quantity-field">
-                </div>
-                <div class="subtotal">26.00</div>
-                <div class="remove">
-                    <button>Remove</button>
-                </div>
-            </div>
+            <?php
+                }
+            ?>
+
         </div>
         <aside>
             <div class="summary">
                 <div class="summary-total-items"><span class="total-items"></span> Items in your Bag</div>
                 <div class="summary-subtotal">
                     <div class="subtotal-title">Subtotal</div>
-                    <div class="subtotal-value final-value" id="basket-subtotal">130.00</div>
+                    <div class="subtotal-value final-value" id="basket-subtotal"><?php echo $subTotal ?></div>
                     <div class="summary-promo hide">
                         <div class="promo-title">Promotion</div>
                         <div class="promo-value final-value" id="basket-promo"></div>
                     </div>
                 </div>
                 <div class="summary-delivery">
-                    <select name="delivery-collection" class="summary-delivery-selection">
-                <option value="0">Select Pick Up Point</option>
-               <option value="collection">Collection</option>
-               <option value="first-class">Royal Mail 1st Class</option>
-               <option value="second-class">Royal Mail 2nd Class</option>
-               <option value="signed-for">Royal Mail Special Delivery</option>
-            </select>
+                    <select name="delivery-collection" class="summary-delivery-selection" disabled>
+                        <option value="0">Select Pick Up Point</option>
+                        <option value="collection">Collection</option>
+                        <option value="first-class">Royal Mail 1st Class</option>
+                        <option value="second-class">Royal Mail 2nd Class</option>
+                        <option value="signed-for">Royal Mail Special Delivery</option>
+                    </select>
                 </div>
                 <div class="summary-total">
                     <div class="total-title">Total</div>
-                    <div class="total-value final-value" id="basket-total">130.00</div>
+                    <div class="total-value final-value" id="basket-total"><?php echo $subTotal ?></div>
                 </div>
                 <div class="summary-checkout">
                     <button class="checkout-cta">Go to Secure Checkout</button>
@@ -177,7 +212,25 @@
     <script src="assets/vendor/counterup/counterup.min.js"></script>
     <script src="assets/vendor/aos/aos.js"></script>
     <script src="assets/js/main.js"></script>
+    <script>
+        function deleteThis(val) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("POST", "_headers/deleteFromCart.php?delete="+val, true);
+            xhttp.send();
+            location.reload();
+        }
+    </script>
+
 </body>
 
 
 </html>
+
+<?php
+    } else {
+        die("Hello World");
+        cookieCheck('cart.php');
+        header('location:login.php');
+    }
+
+?>

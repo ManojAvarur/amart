@@ -17,6 +17,10 @@ if (isset($_SESSION['ADID'])) {
 
     if( isset( $_POST['submit'] ) ) {
 
+        if(! file_exists('../Products/Images') ){
+            mkdir('../Products/Images');
+        }
+
         
         $pd_name = mysqli_escape_string( $con, $_POST['pname']  );
 

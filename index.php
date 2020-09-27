@@ -89,7 +89,7 @@
                 </ul>
             </nav>
         <?php
-            if( isset( $_SESSION['BASICINFO'] ) && isset($_SESSION['ID'] ) ){
+            if( isset( $_SESSION['BASICINFO'] ) && isset( $_SESSION['ID'] ) ){
                 echo "<a href=\"_headers/logout.php\" class=\"login-btn\">" . $_SESSION['BASICINFO']['USER_FNAME'] . "</a>";
             } else {
                 echo "<a href=\"login.php\" class=\"login-btn\">Log In</a>";

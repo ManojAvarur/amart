@@ -108,9 +108,11 @@ require "_headers/connection.php";
                             </div>
                         </div>
                         <div class="price"><?php echo $row['PRD_PRICE'] ?></div>
+
                         <div class="quantity">
-                            <input type="number" value="<?php echo $row['CRT_QUANTITY'] ?>" min="1" max="5" class="quantity-field">
+                            <?php echo "<input type='number' value='" . $row['CRT_QUANTITY'] . "' min='1'  max='40' id='" . $row['PRD_ID'] . "' onkeyup='modify(\"" . $row['PRD_ID'] . "\")' onclick='modify(\"" . $row['PRD_ID'] . "\")' class='quantity-field'>" ?>
                         </div>
+
                         <?php  
                             //echo"<br><br><br><br><br><br><br>    ". gettype((float)$row['PRD_PRICE']);
                             //die(); 
@@ -213,11 +215,33 @@ require "_headers/connection.php";
     <script src="assets/vendor/aos/aos.js"></script>
     <script src="assets/js/main.js"></script>
     <script>
+
+        
+
+
         function deleteThis(val) {
             var xhttp = new XMLHttpRequest();
-            xhttp.open("POST", "_headers/deleteFromCart.php?delete="+val, true);
-            xhttp.send();
+            xhttp.open("POST", "_headers/alterCartData.php" , true);
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send("delete="+val); //fname=Henry&lname=Ford
             location.reload();
+        }
+
+        function modify(val){
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("POST", "_headers/alterCartData.php" , true);
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            var quantity = document.getElementById(val).value;
+            if( quantity < 50 && quantity > 0 ){
+                xhttp.send("token="+val+"&updateQuantity="+quantity);
+                xhttp.onreadystatechange = function() {
+                    if ( this.readyState == 4 && this.status == 200 && this.responseText != " " ) {
+                        alert( this.responseText );
+                    }
+                };
+            } else {
+                alert("Quantity cannot be 0 or greater than 5");
+            }
         }
     </script>
 

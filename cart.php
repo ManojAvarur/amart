@@ -108,9 +108,11 @@ require "_headers/connection.php";
                             </div>
                         </div>
                         <div class="price"><?php echo $row['PRD_PRICE'] ?></div>
+                        <?php echo "<input type='hidden' id='" . $row['PRD_ID'] . "-product-price' value='" . $row['PRD_PRICE'] . "' > "  ?>
 
                         <div class="quantity">
-                            <?php echo "<input type='number' value='" . $row['CRT_QUANTITY'] . "' min='1'  max='40' id='" . $row['PRD_ID'] . "' onkeyup='modify(\"" . $row['PRD_ID'] . "\")' onclick='modify(\"" . $row['PRD_ID'] . "\")' class='quantity-field'>" ?>
+                            <?php echo "<input type='number' value='" . $row['CRT_QUANTITY'] . "' min='1'  max='4' id='" . $row['PRD_ID'] . "-quantity' onkeyup='modify(\"" . $row['PRD_ID'] . "\")' onclick='modify(\"" . $row['PRD_ID'] . "\")' class='quantity-field'>" ?>
+                        <br>
                         </div>
 
                         <?php  
@@ -119,7 +121,8 @@ require "_headers/connection.php";
                             $price = (float)$row['PRD_PRICE'] ;
                             $qunt = (int)$row['CRT_QUANTITY'] ;
                             $prdTotal = $price * $qunt ;
-                            echo "<div class='subtotal'>" . $prdTotal . "</div>";
+                            echo "<p class='subtotal' id='" . $row['PRD_ID'] . "-product-subtotal'>" . $prdTotal . "</p>";
+                            //echo "<input type='hidden' id='" . $row['PRD_ID'] . "-product-subtotal' value='" . $prdTotal  . "'>";
                             $subTotal += $prdTotal;
 
                         ?>
@@ -139,8 +142,8 @@ require "_headers/connection.php";
             <div class="summary">
                 <div class="summary-total-items"><span class="total-items"></span> Items in your Bag</div>
                 <div class="summary-subtotal">
-                    <div class="subtotal-title">Subtotal</div>
-                    <div class="subtotal-value final-value" id="basket-subtotal"><?php echo $subTotal ?></div>
+                    <p class="subtotal-title">Subtotal</p>
+                    <p class="subtotal-value final-value" id="basket-subtotal"><?php echo $subTotal ?></p>
                     <div class="summary-promo hide">
                         <div class="promo-title">Promotion</div>
                         <div class="promo-value final-value" id="basket-promo"></div>
@@ -156,8 +159,8 @@ require "_headers/connection.php";
                     </select>
                 </div>
                 <div class="summary-total">
-                    <div class="total-title">Total</div>
-                    <div class="total-value final-value" id="basket-total"><?php echo $subTotal ?></div>
+                    <p class="total-title">Total</p>
+                    <p class="total-value final-value" id="basket-total"><?php echo $subTotal ?></p>
                 </div>
                 <div class="summary-checkout">
                     <button class="checkout-cta">Go to Secure Checkout</button>
@@ -217,9 +220,22 @@ require "_headers/connection.php";
     <script>
 
         
+        function reCalculate( val ){
+            var prdPrice = parseFloat( document.getElementById( val + "-product-price" ).value );
+            var quant = parseInt( document.getElementById( val + "-quantity" ).value );
+            var prdSubTotal = parseFloat( document.getElementById( val + "-product-subtotal" ).innerHTML );
+            var total = parseFloat( document.getElementById( "basket-total" ).innerHTML );
+            var tempTotal = ( total - prdSubTotal ) + ( prdPrice * quant );
+            // var tempPrdSubTotal = 
+            // alert( " Pprice : " +prdPrice + " Quanti: " + quant + " prdsubtotal: " + prdSubTotal + " Total: " + tempTotal );
+            document.getElementById( "basket-total" ).innerHTML = tempTotal;
+            document.getElementById( "basket-subtotal" ).innerHTML = tempTotal;
+            document.getElementById( val + "-product-subtotal" ).innerHTML = ( prdPrice * quant );
 
 
-        function deleteThis(val) {
+        }        
+
+        function deleteThis( val ) {
             var xhttp = new XMLHttpRequest();
             xhttp.open("POST", "_headers/alterCartData.php" , true);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -227,20 +243,33 @@ require "_headers/connection.php";
             location.reload();
         }
 
-        function modify(val){
+        function modify( val ){
             var xhttp = new XMLHttpRequest();
             xhttp.open("POST", "_headers/alterCartData.php" , true);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            var quantity = document.getElementById(val).value;
-            if( quantity < 50 && quantity > 0 ){
+            var quantity = parseInt( document.getElementById( val + "-quantity" ).value );
+            if( quantity < 5 && quantity >= 1 ){
                 xhttp.send("token="+val+"&updateQuantity="+quantity);
                 xhttp.onreadystatechange = function() {
                     if ( this.readyState == 4 && this.status == 200 && this.responseText != " " ) {
                         alert( this.responseText );
                     }
                 };
+            document.getElementById( val + "-quantity" ).value = quantity;
+            reCalculate( val );
+            // alert( parseInt( document.getElementById("ENT-123-321-product-price").value ) );
+            // document.getElementById("basket-total").innerHTML = "Hello";
             } else {
-                alert("Quantity cannot be 0 or greater than 5");
+                // alert("Quantity cannot be 0 or greater than 5");
+                if( quantity > 4 ){
+                    document.getElementById( val + "-quantity" ).value = 4;
+                    alert("Quantity cannot be greater than 4");
+                    reCalculate( val );
+                }else if( quantity < 1 ){
+                    document.getElementById( val + "-quantity" ).value = 1;
+                    alert("Quantity cannot be less than 1");
+                    reCalculate( val );
+                }
             }
         }
     </script>
@@ -252,7 +281,6 @@ require "_headers/connection.php";
 
 <?php
     } else {
-        die("Hello World");
         cookieCheck('cart.php');
         header('location:login.php');
     }

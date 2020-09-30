@@ -16,9 +16,9 @@
 
     if( isset( $_POST['token'] )  && isset( $_SESSION['ID'] ) && isset( $_POST['updateQuantity'] ) && $_POST['token'] != "" && $_POST['updateQuantity'] != "" ){
 
-        if( $_POST['updateQuantity'] != 0 && $_POST['updateQuantity'] < 5 ){
+        if( $_POST['updateQuantity'] >= 1 && $_POST['updateQuantity'] < 5 ){
             $pid = mysqli_escape_string( $con, $_POST['token'] );
-            $qunt = mysqli_escape_string( $con, $_POST['updateQuantity']  );
+            $qunt = mysqli_escape_string( $con, (int)$_POST['updateQuantity']  );
             $lid = mysqli_escape_string( $con, $_SESSION['ID'] );
 
             $sql = "UPDATE cart ";

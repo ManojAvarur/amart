@@ -51,7 +51,7 @@ if (isset( $_SESSION['ADID']) && isset( $_GET['location'] ) && in_array( $_GET['
         </div>
     </header>
 
-    <section id="ad_home" class="d-flex align-items-center justify-content-center">
+    <section id="ad_home1" class="d-flex align-items-center justify-content-center">
         <div class="container">
             <div class="row justify-content-center" data-aos="fade-down" data-aos-delay="150">
                 <div>

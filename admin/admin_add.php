@@ -121,7 +121,6 @@ if (isset($_SESSION['ADID'])) {
                                 // die(mysqli_error($con));
                                 dataDelete($DbIds, $upLoc);
 
-                                 
                                 die( "<script>
                                                 alert('An error ocurred while uploading \\n Try again');
                                                 window.history.go(-1);
@@ -234,7 +233,7 @@ if (isset($_SESSION['ADID'])) {
         </div>
     </header>
 
-    <section id="ad_home" class="d-flex align-items-center justify-content-center">
+    <section id="ad_home1" class="d-flex align-items-center justify-content-center">
         <div class="container">
             <div class="row justify-content-center" data-aos="fade-down" data-aos-delay="150">
                 <div>

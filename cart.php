@@ -17,7 +17,7 @@ require "_headers/connection.php";
 
         global $con;
 
-        $sql = "SELECT P.PRD_NAME, P.PRD_ID, P.PRD_PRICE, C.CRT_QUANTITY, PI.IMG_PATH  ";
+        $sql = "SELECT P.PRD_NAME, P.PRD_ID, P.PRD_PRICE, P.PRD_OFFERS, C.CRT_QUANTITY, PI.IMG_PATH  ";
         $sql .= "FROM product P, cart C, prd_image PI ";
         $sql .= " WHERE C.CRT_LOGIN_ID = '" . $_SESSION['ID'] . "' AND ";
         $sql .= "P.PRD_ID = C.CRT_PRD_ID AND ";
@@ -72,11 +72,11 @@ require "_headers/connection.php";
         </div>
     </header>
 
-    <section id="ad_home" style="height: 10%; margin-top: -3%;" class="d-flex align-items-center justify-content-center">
+    <section id="ad_home1" class="d-flex align-items-center justify-content-center">
         <div class="container">
             <div class="row justify-content-center" data-aos="fade-down" data-aos-delay="150">
                 <div>
-                    <h1>Your cart<span>.</span></h1>
+                    <h2>Your Cart<span>.</span></h2>
                 </div>
             </div>
         </div>
@@ -104,7 +104,7 @@ require "_headers/connection.php";
                             <div class="product-details">
                                 <!-- <h1><strong><span class="item-quantity">4</span> x abc</strong> test</h1> Price of the the product (multiply) by Quntity and total -->
                                 <?php echo "<p><strong>" . $row['PRD_NAME'] . "</strong></p>" ?><!-- Product Name-->
-                                <?php echo "<p>Product Code - " . $row['PRD_ID'] . "</p> " ?><!-- Product Code -->
+                                <?php echo "<p>Product Offer - " . $row['PRD_OFFERS'] . "</p> " ?><!-- Product Code -->
                             </div>
                         </div>
                         <div class="price"><?php echo $row['PRD_PRICE'] ?></div>

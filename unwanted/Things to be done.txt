@@ -6,7 +6,8 @@
 -> Image is not getting cropped after upload
 -> Information about discount
 -> Doubts regarding database
--> 
+--> Quantity update
+--> Subtotal update
 
 
 

@@ -1,34 +1,48 @@
+
 <?php 
-    require "_headers/connection.php";
-    require "_headers/functions.php";
+    require '_headers/connection.php';
+    require '_headers/functions.php';
 
     session_start() ;
 
-    if( isset( $_SESSION['ID'] ) && $_SESSION['ID'] != "" ){
+    if(isset( $_GET['cate'] ) && $_GET['cate'] != "" ){
 
-        if (! isset( $_SESSION['BASICINFO'] ) )
-            setBasicInfo($_SESSION['ID']);
+        if( isset( $_SESSION['ID'] ) ){
 
-    } else {
+            if (! isset( $_SESSION['BASICINFO'] ) )
+                setBasicInfo($_SESSION['ID']);
+    
+        } else {
 
-        cookieCheck();
+            cookieCheck( 'category.php?cate='.$_GET['cate'] ) ;
+                           
+        }
+
+        $id = $_GET['cate'];
+
+        $sql = "SELECT CAT_NAME FROM CATEGORY WHERE CAT_ID = $id;";
+
+        $sql = mysqli_query($con, $sql);
+
+        if( mysqli_num_rows( $sql ) > 0 ){
         
-    }
+        $rows = mysqli_fetch_assoc($sql);
+
+        $name = $rows['CAT_NAME'];
+
+        $query = "SELECT P.PRD_NAME, P.PRD_DETAILS, I.IMG_PATH FROM PRD_IMAGE I, PRODUCT P WHERE P.PRD_CAT_ID = $id AND P.PRD_ID = I.IMG_PRD_ID GROUP BY P.PRD_ID; ";
+
+        $query = mysqli_query($con, $query);
+
+        } else {
+            header('location:index.php');
+        }
 
 
-    $select = "SELECT P.PRD_NAME, P.PRD_DETAILS, I.IMG_PATH FROM PRD_IMAGE I, PRODUCT P WHERE P.PRD_ID = I.IMG_PRD_ID GROUP BY P.PRD_ID; " ;
-
-    $qselect = mysqli_query($con, $select);
-
-    $query = "SELECT CAT_ID, CAT_NAME FROM CATEGORY; ";
-
-    $query = mysqli_query($con, $query)
-
-    // die($select);
-    
-    // die(mysqli_error($con)."");
-    
 ?>
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -36,18 +50,18 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Amart</title>
+    <title><?php echo $name ?></title>
     <meta content="Amart, amart sales, amart india" name="description">
     <meta content="Amart, India, Sales, Refrigerator Sales, TV Sales, Hardware Sales" name="keywords">
     <link href="assets/img/a.png" rel="icon">
     <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
     <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
     <link href="assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="assets/vendor/venobox/venobox.css" rel="stylesheet">
-    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
     <link href="assets/vendor/aos/aos.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
 
@@ -56,18 +70,19 @@
 <body>
     <header id="header" class="fixed-top ">
         <div class="container d-flex align-items-center justify-content-between">
-            <h1 class="logo"><a href="index.php">Amart<span>.</span></a></h1>
+            <h1 class="logo"><a href="index.html">Amart<span>.</span></a></h1>
             <nav class="nav-bar d-none d-lg-block">
                 <ul>
-                    <li class="active"><a href="index.php">Home</a></li>
+                    <li class="active"><a href="index.html">Home</a></li>
                     <li class="drop-down"><a>Shop by Category</a>
                         <ul>
-
-                <?php displayCategory() ?>
-
+                            <li><a href="electronics.html">Electronics</a></li>
+                            <li><a href="hardware.html">Hardware</a></li>
+                            <li><a href="kitchen.html">Kitchen Appliances</a></li>
+                            <li><a href="living_room.html">Living Room</a></li>
                         </ul>
                     </li>
-                    <li><a href="admin/admin_index.php">Admin</a></li>
+                    <li><a href="admin_home.html">Admin</a></li>
                 </ul>
             </nav>
             <nav class="nav-bar d-lg-none d-sm-block">
@@ -75,110 +90,75 @@
                     <li class="drop-down">
                         <a></a>
                         <ul>
-                            <li class="active"><a href="index.php">Home</a></li>
+                            <li class="active"><a href="index.html">Home</a></li>
                             <li class="drop-down"><a>Shop by Category</a>
                                 <ul>
-
-                <?php displayCategory() ?>
-
+                                    <li><a href="electronics.html">Electronics</a></li>
+                                    <li><a href="hardware.html">Hardware</a></li>
+                                    <li><a href="kitchen.html">Kitchen Appliances</a></li>
+                                    <li><a href="living_room.html">Living Room</a></li>
                                 </ul>
-                                <li><a href="admin/admin_index.php">Admin</a></li>
+                                <li><a href="admin_home.html">Admin</a></li>
                         </ul>
                         </li>
                 </ul>
             </nav>
-
-        <?php
-            if( isset( $_SESSION['BASICINFO'] ) && isset( $_SESSION['ID'] ) ){
-                echo "<a href=\"_headers/logout.php\" class=\"login-btn\">" . $_SESSION['BASICINFO']['USER_FNAME'] . "</a>";
-            } else {
-                echo "<a href=\"login.php\" class=\"login-btn\">Log In</a>";
-            }
-        ?>
-            
+            <?php
+                if( isset( $_SESSION['BASICINFO'] ) && isset( $_SESSION['ID'] ) ){
+                    echo "<a href=\"_headers/logout.php\" class=\"login-btn\">" . $_SESSION['BASICINFO']['USER_FNAME'] . "</a>";
+                } else {
+                    echo "<a href=\"login.php\" class=\"login-btn\">Log In</a>";
+                }
+            ?>
         </div>
     </header>
 
-    <section id="main_home" class="d-flex align-items-center justify-content-center">
+    <section id="temp_home" class="d-flex align-items-center justify-content-center">
         <div class="container">
             <div class="row justify-content-center" data-aos="fade-down" data-aos-delay="150">
-                <div class="col-xl-6 col-lg-8">
-                    <h1>Welcome to AMART<span>.</span></h1>
-                    <h2>Choose from a wide range of products at unbelievable discounts</h2>
+                <div>
+                    <h1>Welcome to <?php echo $name ?><span>.</span></h1>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="offers">
+    <section>
         <div class="container">
-            <div class="owl-carousel offers-carousel">
-                <img style="border-radius: 10%;" src="assets/img/refr2.jpg" alt="">
-                <img style="border-radius: 10%;" src="assets/img/tv.jpg" alt="">
-                <img style="border-radius: 10%;" src="assets/img/hardware.jpg" alt="">
-                <img style="border-radius: 10%;" src="assets/img/kitchen.jpg" alt="">
-                <img style="border-radius: 10%;" src="assets/img/living.jpg" alt="">
-            </div>
-        </div>
-    </section>
-
-    <section class="amart_features">
-        <div class="container" data-aos="fade-up">
             <div class="row">
-                <div class="image col-lg-6" style='background-image: url("assets/img/key.jpg"); border-radius: 10px;' data-aos="fade-left"></div>
-                <div class="col-lg-6" data-aos="fade-left" data-aos-delay="50">
-                    <div class="icon-box mt-5 mt-lg-0" data-aos="zoom-in" data-aos-delay="100">
-                        <i class="bx bxs-truck"></i>
-                        <h4>Fast delivery</h4>
-                        <p>Usually Dispatched within 2-3 working days</p>
-                    </div>
-                    <div class="icon-box mt-5" data-aos="zoom-in" data-aos-delay="100">
-                        <i class="bx bx-receipt"></i>
-                        <h4>Hassle Free Booking</h4>
-                        <p>Interactive User Interface to order any number of items at once</p>
-                    </div>
-                    <div class="icon-box mt-5" data-aos="zoom-in" data-aos-delay="100">
-                        <i class="bx bx-cube-alt"></i>
-                        <h4>Easy Returns Policy</h4>
-                        <p>Read Terms and Conditions for more information on Return Policies</p>
-                    </div>
+                <div class="col-lg-6 order-1 order-lg-2">
+                    <img src="assets/img/refr2.jpg" class="img-fluid" alt="">
+                </div>
+                <div class="col-lg-6 order-1 order-lg-2">
+                    <img src="assets/img/tv.jpg" class="img-fluid" alt="">
                 </div>
             </div>
-
         </div>
     </section>
+
 
     <section class="products">
         <div class="container" data-aos="fade-down">
             <div class="section-title">
-                <h2>Products</h2>
+                <h2><?php echo $name ?></h2>
                 <p>Choose products</p>
             </div>
-
+                    
             <div class="row">
 
-            
+            <?php while( $rows = mysqli_fetch_assoc( $query ) ) { ?>
 
-           
-
-        <?php while($rows = mysqli_fetch_assoc( $qselect )) { 
-          
-            echo "
-                <div class='col-lg-4 col-md-6 d-flex align-items-stretch mt-4'>
-                    <div class='icon-box'>
-                        <div class='icon'> <img src='" . $rows['IMG_PATH'] . "' alt='" . $rows['PRD_DETAILS'] . "' width= '250' height= '250'>  </div>
-                        <h4><a href=''>". $rows['PRD_NAME'] ."</a></h4>
-                        <p>" . $rows['PRD_DETAILS'] . "</p> 
-                        <br>";
-                     if( isset( $_SESSION['ID'] ) )
-                        echo "<button style = 'background-color : #c69962' type='button' class='btn btn-success'>Add to Cart</button>";
-                
-            echo "
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
+                    <div class="icon-box">
+                        <div class="icon"  > <img src="<?php  echo $rows['IMG_PATH']; ?>" alt="" width= "250" height= "250">  </div>
+                        <h4><a href=""><?php  echo $rows['PRD_NAME']; ?></a></h4>
+                        <p><?php echo $rows['PRD_DETAILS']; ?></p>
+                        <button style = "background-color : #c69962" type="button" class="btn btn-success">Add to Cart</button>
                     </div>
-                </div> ";
-                
+                </div>
 
-         } ?>
+            <?php } ?>
+
 
             </div>
 
@@ -237,3 +217,9 @@
 
 </html>
 
+
+<?php 
+    } else {
+        header('location:index.php');
+    } 
+?>

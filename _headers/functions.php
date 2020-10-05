@@ -40,8 +40,9 @@ function cookieCheck($location='index.php'){
             header('location:'.$location);
 
         } 
-       
 
+    } else {
+        return 0;
     }
 
 }
@@ -128,12 +129,31 @@ function echoCategories($check = 0, $escape = 0){
 
 }
 
+function displayCategory() {
+
+    global $con;
+
+    $query = "SELECT CAT_ID, CAT_NAME FROM CATEGORY; ";
+
+    $query = mysqli_query($con, $query);
+
+    while($row = mysqli_fetch_assoc( $query )) { 
+
+        $cid =  $row['CAT_ID'];
+        $name = $row['CAT_NAME'];
+
+        // echo '<a href="../category.php?cate=' . $cid . '>' . $row['CAT_NAME'] . '</a>';
+        echo "<li> <a href = 'category.php?cate=". $cid ."'>" . $row['CAT_NAME'] . "</a></li>" ;
+    }
+
+}
+// <li><a href="living_room.html">Living Room</a></li>
 
 function dataDelete( $a1, $a2 ){
 
     global $con;
 
-    $sql = "DELETE FROM PRODUCT WHERE PRD_ID = '". $a1[0] ."' ";
+    $sql = "DELETE FROM PRODUCT WHERE PRD_ID = '". $a1[0] ."' ";    
 
    if( !mysqli_query( $con, $sql ) ){
     echo "<script> alert(' Deletion of product failed. Try Updating the product ') </script>";

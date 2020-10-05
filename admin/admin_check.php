@@ -84,6 +84,16 @@
         </div>
     </header>
 
+    <section id="ad_home1" class="d-flex align-items-center justify-content-center">
+        <div class="container">
+            <div class="row justify-content-center" data-aos="fade-down" data-aos-delay="150">
+                <div>
+                    <h1>All Products<span>.</span></h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="products">
         <div class="container" data-aos="fade-down">
             <div class="section-title">

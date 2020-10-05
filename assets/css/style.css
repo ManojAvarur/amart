@@ -810,7 +810,7 @@ section {
 .dropdown-content {
     display: none;
     position: absolute;
-    margin-top: 12%;
+    /* margin-top: 2%; */
     margin-left: -60%;
     background-color: #fff;
     min-width: 150px;
@@ -927,4 +927,3 @@ section {
         max-width: 100%;
     }
 }
-

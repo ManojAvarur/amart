@@ -63,6 +63,7 @@ require "../_headers/functions.php";
             </nav>
             <div class="dropdown login-btn">
                 <p style="margin-bottom: 0px;"> <?php echo $_SESSION['ADBASICINFO']['AD_FIRSTNAME'] ?> </p>
+                <!-- <p style="margin-bottom: 0px;"> asdfghjkoiuytrewaseddcftgbhj </p> -->
                 <div class="dropdown-content">
                     <a href="admin_index.php">Home</a>
                     <a href="admin_details.php">My Account</a>

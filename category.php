@@ -14,8 +14,7 @@
     
         } else {
 
-            cookieCheck( 'category.php?cate='.$_GET['cate'] ) ;
-                           
+            cookieCheck( 'category.php?cate='.$_GET['cate'] ) ;                        
         }
 
         $id = $_GET['cate'];
@@ -30,7 +29,7 @@
 
         $name = $rows['CAT_NAME'];
 
-        $query = "SELECT P.PRD_NAME, P.PRD_DETAILS, I.IMG_PATH FROM PRD_IMAGE I, PRODUCT P WHERE P.PRD_CAT_ID = $id AND P.PRD_ID = I.IMG_PRD_ID GROUP BY P.PRD_ID; ";
+        $query = "SELECT P.PRD_NAME, P.PRD_DETAILS, I.IMG_PATH, P.PRD_ID FROM PRD_IMAGE I, PRODUCT P WHERE P.PRD_CAT_ID = $id AND P.PRD_ID = I.IMG_PRD_ID GROUP BY P.PRD_ID; ";
 
         $query = mysqli_query($con, $query);
 
@@ -146,18 +145,22 @@
                     
             <div class="row">
 
-            <?php while( $rows = mysqli_fetch_assoc( $query ) ) { ?>
+            <?php while( $rows = mysqli_fetch_assoc( $query ) ) {             
+                
+                echo " <div class='col-lg-4 col-md-6 d-flex align-items-stretch mt-4'>
+                        <div class='icon-box'>
+                            <div class='icon'> <img src='" . $rows['IMG_PATH'] . "' alt='" . $rows['PRD_DETAILS'] . "' width= '250' height= '250'>  </div>
+                            <h4><a href=''>". $rows['PRD_NAME'] ."</a></h4>
+                            <p>" . $rows['PRD_DETAILS'] . "</p> 
+                            <br>";
 
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-                    <div class="icon-box">
-                        <div class="icon"  > <img src="<?php  echo $rows['IMG_PATH']; ?>" alt="" width= "250" height= "250">  </div>
-                        <h4><a href=""><?php  echo $rows['PRD_NAME']; ?></a></h4>
-                        <p><?php echo $rows['PRD_DETAILS']; ?></p>
-                        <button style = "background-color : #c69962" type="button" class="btn btn-success">Add to Cart</button>
-                    </div>
-                </div>
-
-            <?php } ?>
+                if( isset( $_SESSION['ID'] ) )
+                    echo "<button style = 'background-color : #c69962' type='button' class='btn btn-success' onclick='atc(\"".$rows['PRD_ID']."\")'>Add to Cart</button>";
+                
+                echo "</div>
+                    </div> ";
+                
+ } ?>
 
 
             </div>
@@ -213,6 +216,25 @@
     <script src="assets/vendor/counterup/counterup.min.js"></script>
     <script src="assets/vendor/aos/aos.js"></script>
     <script src="assets/js/main.js"></script>
+    <?php
+        if( isset( $_SESSION['ID'] ) ){
+    ?>
+        <script>
+            function atc( val ){
+                var xhttp = new XMLHttpRequest();
+                xhttp.open("POST", "_headers/alterCartData.php" , true);
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhttp.send("atc="+val);
+                xhttp.onreadystatechange = function() {
+                    if ( this.readyState == 4 && this.status == 200 && this.responseText != " " ) {
+                        alert( this.responseText );
+                    }
+                };   
+            }
+        </script>
+    <?php
+        }
+    ?>
 </body>
 
 </html>

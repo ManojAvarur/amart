@@ -39,7 +39,7 @@ if (isset( $_SESSION['ADID']) && isset( $_GET['location'] ) && in_array( $_GET['
 <body>
     <header id="header" class="fixed-top ">
         <div class="container d-flex align-items-center justify-content-between">
-            <h1 class="logo"><a href="index.html">Amart<span style="font-size: medium;">ADMIN</span></a></h1>
+            <h1 class="logo"><a href="../index.php">Amart<span style="font-size: medium;">ADMIN</span></a></h1>
             <div class="dropdown login-btn">
                 <p style="margin-bottom: 0px;"> <?php echo $_SESSION['ADBASICINFO']['AD_FIRSTNAME'] ?> </p>
                 <div class="dropdown-content">

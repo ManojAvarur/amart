@@ -51,13 +51,13 @@
 <body>
     <header id="header" class="fixed-top ">
         <div class="container d-flex align-items-center justify-content-between">
-            <h1 class="logo"><a href="index.html">Amart<span style="font-size: medium;">ADMIN</span></a></h1>
+            <h1 class="logo"><a href="../index.php">Amart<span style="font-size: medium;">ADMIN</span></a></h1>
             <nav class="nav-bar d-none d-lg-block">
                 <ul>
                     <li><a href="admin_add.php">Add Product</a></li>
-                    <li><a href="admin_delete.html">Delete Product</a></li>
-                    <li><a href="admin_update.html">Update Product</a></li>
-                    <li><a href="admin_all.html">Check Products</a></li>
+                    <li><a href="admin_delete.php">Delete Product</a></li>
+                    <li><a href="admin_update.php">Update Product</a></li>
+                    <li><a href="admin_check.php">Check Products</a></li>
                 </ul>
             </nav>
             <nav class="nav-bar d-lg-none d-sm-block">
@@ -66,9 +66,9 @@
                         <a></a>
                         <ul>
                             <li><a href="admin_add.php">Add Product</a></li>
-                            <li><a href="admin_delete.html">Delete Product</a></li>
-                            <li><a href="admin_update.html">Update Product</a></li>
-                            <li><a href="admin_all.html">Check Products</a></li>
+                            <li><a href="admin_delete.php">Delete Product</a></li>
+                            <li><a href="admin_update.php">Update Product</a></li>
+                            <li><a href="admin_check.php">Check Products</a></li>
                         </ul>
                     </li>
                 </ul>

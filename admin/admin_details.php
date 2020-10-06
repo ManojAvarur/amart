@@ -59,11 +59,11 @@ require "../_headers/connection.php";
 <body>
     <header id="header" class="fixed-top ">
         <div class="container d-flex align-items-center justify-content-between">
-            <h1 class="logo"><a href="index.html">Amart<span style="font-size: medium;">ADMIN</span></a></h1>
+            <h1 class="logo"><a href="../index.php">Amart<span style="font-size: medium;">ADMIN</span></a></h1>
             <div class="dropdown login-btn">
-                <p style="margin-bottom: 0px;">qwertyuiop;lkjhgfdsazxcvbnm,.fghj</p>
+                <p style="margin-bottom: 0px;"><?php echo $_SESSION['ADBASICINFO']['AD_FIRSTNAME'] ?> </p>
                 <div class="dropdown-content">
-                    <a href="admin_index.html">Home</a>
+                    <a href="admin_index.php">Home</a>
                     <a href="admin_details.php">My Account</a>
                     <a href="../_headers/logout.php">Log Out</a>
                 </div>

@@ -145,19 +145,18 @@ if( isset( $_POST['reinsert_password'] ) && isset( $_SESSION['LOGIN_ID'] ) ){
 <body>
     <header id="header" class="fixed-top ">
         <div class="container d-flex align-items-center justify-content-between">
-            <h1 class="logo"><a href="index.html">Amart<span>.</span></a></h1>
+            <h1 class="logo"><a href="index.php">Amart<span>.</span></a></h1>
             <nav class="nav-bar d-none d-lg-block">
                 <ul>
-                    <li class="active"><a href="index.html">Home</a></li>
+                    <li class="active"><a href="index.php">Home</a></li>
                     <li class="drop-down"><a>Shop by Category</a>
                         <ul>
-                            <li><a href="electronics.html">Electronics</a></li>
-                            <li><a href="hardware.html">Hardware</a></li>
-                            <li><a href="kitchen.html">Kitchen Appliances</a></li>
-                            <li><a href="living_room.html">Living Room</a></li>
+
+                <?php displayCategory() ?>
+
                         </ul>
                     </li>
-                    <li><a href="admin_home.html">Admin</a></li>
+                    <li><a href="admin/admin_index.php">Admin</a></li>
                 </ul>
             </nav>
             <nav class="nav-bar d-lg-none d-sm-block">
@@ -165,15 +164,14 @@ if( isset( $_POST['reinsert_password'] ) && isset( $_SESSION['LOGIN_ID'] ) ){
                     <li class="drop-down">
                         <a></a>
                         <ul>
-                            <li class="active"><a href="index.html">Home</a></li>
+                            <li class="active"><a href="index.php">Home</a></li>
                             <li class="drop-down"><a>Shop by Category</a>
                                 <ul>
-                                    <li><a href="electronics.html">Electronics</a></li>
-                                    <li><a href="hardware.html">Hardware</a></li>
-                                    <li><a href="kitchen.html">Kitchen Appliances</a></li>
-                                    <li><a href="living_room.html">Living Room</a></li>
+
+                    <?php displayCategory() ?>
+
                                 </ul>
-                                <li><a href="admin_home.html">Admin</a></li>
+                                <li><a href="admin/admin_index.php">Admin</a></li>
                         </ul>
                         </li>
                 </ul>

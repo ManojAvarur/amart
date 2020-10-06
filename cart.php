@@ -38,7 +38,7 @@ require "_headers/connection.php";
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Amart Admin</title>
+    <title>Amart</title>
     <meta content="Amart, amart sales, amart india" name="description">
     <meta content="Amart, India, Sales, Refrigerator Sales, TV Sales, Hardware Sales" name="keywords">
     <link href="assets/img/a.png" rel="icon">
@@ -60,7 +60,7 @@ require "_headers/connection.php";
 <body>
     <header id="header" class="fixed-top ">
         <div class="container d-flex align-items-center justify-content-between">
-            <h1 class="logo"><a href="index.html">Amart<span style="font-size: medium;">ADMIN</span></a></h1>
+            <h1 class="logo"><a href="index.php">Amart<span style="font-size: medium;">.</span></a></h1>
             <div class="dropdown login-btn">
                 <p style="margin-top: 0px;"><?php echo $_SESSION['BASICINFO']['USER_FNAME'] ?></p>
                 <div class="dropdown-content">

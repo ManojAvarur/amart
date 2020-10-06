@@ -15,4 +15,5 @@
 
 
 
- --> Products not aliging in display
+--> Products not aliging in display
+--> View cart button (is it needed!?)

@@ -74,13 +74,12 @@ if (isset( $_SESSION['ADID']) && isset( $_GET['location'] ) && in_array( $_GET['
 <body>
     <header id="header" class="fixed-top ">
         <div class="container d-flex align-items-center justify-content-between">
-            <h1 class="logo"><a href="index.html">Amart<span style="font-size: medium;">ADMIN</span></a></h1>
+            <h1 class="logo"><a href="../index.php">Amart<span style="font-size: medium;">ADMIN</span></a></h1>
             <nav class="nav-bar d-none d-lg-block">
                 <ul>
-                    <li><a href="admin_add.php">Add Product</a></li>
-                    <li><a href="admin_delete.html">Delete Product</a></li>
-                    <li><a href="admin_update.html">Update Product</a></li>
-                    <li><a href="admin_all.html">Check Products</a></li>
+
+            <?php displayCategory() ?>
+
                 </ul>
             </nav>
             <nav class="nav-bar d-lg-none d-sm-block">
@@ -88,10 +87,9 @@ if (isset( $_SESSION['ADID']) && isset( $_GET['location'] ) && in_array( $_GET['
                     <li class="drop-down">
                         <a></a>
                         <ul>
-                            <li><a href="admin_add.php">Add Product</a></li>
-                            <li><a href="admin_delete.html">Delete Product</a></li>
-                            <li><a href="admin_update.html">Update Product</a></li>
-                            <li><a href="admin_all.html">Check Products</a></li>
+
+                <?php displayCategory() ?>
+
                         </ul>
                     </li>
                 </ul>

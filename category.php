@@ -92,7 +92,7 @@
                             <li class="drop-down"><a>Shop by Category</a>
                                 <ul>
 
-                        <?php displayCategory() ?>
+                <?php displayCategory() ?>
 
                                 </ul>
                                 <li><a href="admin/admin_index.php">Admin</a></li>
@@ -100,13 +100,22 @@
                         </li>
                 </ul>
             </nav>
-            <?php
-                if( isset( $_SESSION['BASICINFO'] ) && isset( $_SESSION['ID'] ) ){
-                    echo "<a href=\"_headers/logout.php\" class=\"login-btn\">" . $_SESSION['BASICINFO']['USER_FNAME'] . "</a>";
-                } else {
-                    echo "<a href=\"login.php\" class=\"login-btn\">Log In</a>";
-                }
-            ?>
+
+        <?php
+            if( isset( $_SESSION['BASICINFO'] ) && isset( $_SESSION['ID'] ) ){
+                echo "<div class='dropdown login-btn'>
+                        <p style='margin-top: 0px;'>" . $_SESSION['BASICINFO']['USER_FNAME'] . "</p>
+                        <div class='dropdown-content'>
+                            <a href='index.php'>Home</a>
+                            <a href='cart.php'>My Cart</a>
+                            <a href='_headers/logout.php'>Log Out</a>
+                        </div>
+                    </div>";
+            } else {
+                echo "<a href=\"login.php\" class=\"login-btn\">Log In</a>";
+            }
+        ?>
+            
         </div>
     </header>
 
@@ -119,7 +128,7 @@
             </div>
         </div>
     </section>
-
+<!-- 
     <section>
         <div class="container">
             <div class="row">
@@ -131,7 +140,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
 
     <section class="products">

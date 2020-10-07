@@ -60,15 +60,53 @@ require "_headers/connection.php";
 <body>
     <header id="header" class="fixed-top ">
         <div class="container d-flex align-items-center justify-content-between">
-            <h1 class="logo"><a href="index.php">Amart<span style="font-size: medium;">.</span></a></h1>
-            <div class="dropdown login-btn">
-                <p style="margin-top: 0px;"><?php echo $_SESSION['BASICINFO']['USER_FNAME'] ?></p>
-                <div class="dropdown-content">
-                    <a href="index.php">Home</a>
-                    <a href="#">My Account</a>
-                    <a href="_headers/logout.php">Log Out</a>
-                </div>
-            </div>
+            <h1 class="logo"><a href="index.php">Amart<span>.</span></a></h1>
+            <nav class="nav-bar d-none d-lg-block">
+                <ul>
+                    <li class="active"><a href="index.php">Home</a></li>
+                    <li class="drop-down"><a>Shop by Category</a>
+                        <ul>
+
+                <?php displayCategory() ?>
+
+                        </ul>
+                    </li>
+                    <li><a href="admin/admin_index.php">Admin</a></li>
+                </ul>
+            </nav>
+            <nav class="nav-bar d-lg-none d-sm-block">
+                <ul>
+                    <li class="drop-down">
+                        <a></a>
+                        <ul>
+                            <li class="active"><a href="index.php">Home</a></li>
+                            <li class="drop-down"><a>Shop by Category</a>
+                                <ul>
+
+                <?php displayCategory() ?>
+
+                                </ul>
+                                <li><a href="admin/admin_index.php">Admin</a></li>
+                        </ul>
+                        </li>
+                </ul>
+            </nav>
+
+        <?php
+            if( isset( $_SESSION['BASICINFO'] ) && isset( $_SESSION['ID'] ) ){
+                echo "<div class='dropdown login-btn'>
+                        <p style='margin-top: 0px;'>" . $_SESSION['BASICINFO']['USER_FNAME'] . "</p>
+                        <div class='dropdown-content'>
+                            <a href='index.php'>Home</a>
+                            <a href='#'>My Cart</a>
+                            <a href='_headers/logout.php'>Log Out</a>
+                        </div>
+                    </div>";
+            } else {
+                echo "<a href=\"login.php\" class=\"login-btn\">Log In</a>";
+            }
+        ?>
+            
         </div>
     </header>
 
@@ -194,7 +232,7 @@ require "_headers/connection.php";
                     <div class="col-lg-3 col-md-6 footer-links">
                         <h4>Contact Us</h4>
                         <ul>
-                            <li><i class="bx bx-wifi-1"></i> <a href="#">Email: amart@example.com</a></li>
+<li><i class="bx bx-wifi-1"></i> <a href="#">Email: no.replay.amart@gmail.com</a></li>
                             <li><i class="bx bx-wifi-1"></i> <a href="#">Phone Number: +91 9800102010</a></li>
                         </ul>
                     </div>

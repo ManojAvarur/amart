@@ -16,7 +16,7 @@
     }
 
 
-    $select = "SELECT P.PRD_NAME, P.PRD_DETAILS, I.IMG_PATH FROM PRD_IMAGE I, PRODUCT P WHERE P.PRD_ID = I.IMG_PRD_ID GROUP BY P.PRD_ID; " ;
+    $select = "SELECT P.PRD_NAME, P.PRD_DETAILS, I.IMG_PATH, P.PRD_ID FROM PRD_IMAGE I, PRODUCT P WHERE P.PRD_ID = I.IMG_PRD_ID GROUP BY P.PRD_ID; " ;
 
     $qselect = mysqli_query($con, $select);
 
@@ -54,6 +54,7 @@
 </head>
 
 <body>
+
     <header id="header" class="fixed-top ">
         <div class="container d-flex align-items-center justify-content-between">
             <h1 class="logo"><a href="index.php">Amart<span>.</span></a></h1>
@@ -90,7 +91,14 @@
 
         <?php
             if( isset( $_SESSION['BASICINFO'] ) && isset( $_SESSION['ID'] ) ){
-                echo "<a href=\"_headers/logout.php\" class=\"login-btn\">" . $_SESSION['BASICINFO']['USER_FNAME'] . "</a>";
+                echo "<div class='dropdown login-btn'>
+                        <p style='margin-top: 0px;'>" . $_SESSION['BASICINFO']['USER_FNAME'] . "</p>
+                        <div class='dropdown-content'>
+                            <a href='#'>Home</a>
+                            <a href='cart.php'>My Cart</a>
+                            <a href='_headers/logout.php'>Log Out</a>
+                        </div>
+                    </div>";
             } else {
                 echo "<a href=\"login.php\" class=\"login-btn\">Log In</a>";
             }
@@ -170,8 +178,9 @@
                         <h4><a href=''>". $rows['PRD_NAME'] ."</a></h4>
                         <p>" . $rows['PRD_DETAILS'] . "</p> 
                         <br>";
-                     if( isset( $_SESSION['ID'] ) )
-                        echo "<button style = 'background-color : #c69962' type='button' class='btn btn-success'>Add to Cart</button>";
+
+                if( isset( $_SESSION['ID'] ) )
+                    echo "<button style = 'background-color : #c69962' type='button' class='btn btn-success' onclick='atc(\"".$rows['PRD_ID']."\")'>Add to Cart</button>";
                 
             echo "
                     </div>
@@ -210,7 +219,7 @@
                     <div class="col-lg-3 col-md-6 footer-links">
                         <h4>Contact Us</h4>
                         <ul>
-                            <li><i class="bx bx-wifi-1"></i> <a href="#">Email: amart@example.com</a></li>
+<li><i class="bx bx-wifi-1"></i> <a href="#">Email: no.replay.amart@gmail.com</a></li>
                             <li><i class="bx bx-wifi-1"></i> <a href="#">Phone Number: +91 9800102010</a></li>
                         </ul>
                     </div>
@@ -233,6 +242,25 @@
     <script src="assets/vendor/counterup/counterup.min.js"></script>
     <script src="assets/vendor/aos/aos.js"></script>
     <script src="assets/js/main.js"></script>
+    <?php
+        if( isset( $_SESSION['ID'] ) ){
+    ?>
+        <script>
+            function atc( val ){
+                var xhttp = new XMLHttpRequest();
+                xhttp.open("POST", "_headers/alterCartData.php" , true);
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhttp.send("atc="+val);
+                xhttp.onreadystatechange = function() {
+                    if ( this.readyState == 4 && this.status == 200 && this.responseText != " " ) {
+                        alert( this.responseText );
+                    }
+                };   
+            }
+        </script>
+    <?php
+        }
+    ?>
 </body>
 
 </html>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 18, 2020 at 09:45 PM
+-- Generation Time: Oct 07, 2020 at 05:10 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -69,6 +69,14 @@ CREATE TABLE `cart` (
   `CRT_QUANTITY` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`CRT_LOGIN_ID`, `CRT_PRD_ID`, `CRT_QUANTITY`) VALUES
+('9ab81b41c023b9cdacb228111bb88fba', '1001', 1),
+('9ab81b41c023b9cdacb228111bb88fba', '1002', 3);
+
 -- --------------------------------------------------------
 
 --
@@ -128,7 +136,7 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`LOGIN_ID`, `EMAIL_ID`, `USER_PASSWORD`, `USER_FNAME`, `USER_PHNO`) VALUES
-('9ab81b41c023b9cdacb228111bb88fba', 'manojavarur@gmail.com', '6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918', 'Manoj A M', 123456789);
+('9ab81b41c023b9cdacb228111bb88fba', 'manojavarur@gmail.com', 'f4bf9f7fcbedaba0392f108c59d8f4a38b3838efb64877380171b54475c2ade8', 'Manoj A M', 123456789);
 
 -- --------------------------------------------------------
 
@@ -159,8 +167,10 @@ CREATE TABLE `prd_image` (
 --
 
 INSERT INTO `prd_image` (`IMG_PRD_ID`, `IMG_PATH`) VALUES
-('EL-ST-123', 'Products/Images/Something-94493832710.png'),
-('EL-ST-123', 'Products/Images/Something-94493832710-0.png');
+('1001', 'Products/Images/Bean bag-94523176969.png'),
+('1002', 'Products/Images/Laddle-94523177104.png'),
+('1003', 'Products/Images/Shower-94523177289.png'),
+('1004', 'Products/Images/Hair Dryer-94523179033.png');
 
 -- --------------------------------------------------------
 
@@ -182,7 +192,10 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`PRD_CAT_ID`, `PRD_ID`, `PRD_NAME`, `PRD_DETAILS`, `PRD_OFFERS`, `PRD_PRICE`) VALUES
-(2001, 'EL-ST-123', 'Something', 'Google It!', 'Fuck Off', 12);
+(2002, '1001', 'Bean bag', 'Extra comfortable', '10% off', 500),
+(2003, '1002', 'Laddle', 'Strong ', 'Buy one get one free', 200),
+(2004, '1003', 'Shower', 'Shiny', '25% off', 5000),
+(2001, '1004', 'Hair Dryer', 'Light weight', '15% off', 570);
 
 -- --------------------------------------------------------
 

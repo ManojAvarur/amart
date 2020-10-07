@@ -1,4 +1,5 @@
 <?php 
+    require '../_headers/functions.php';
 session_start(); 
 
 if (isset( $_SESSION['ADID']) && isset( $_GET['location'] ) && in_array( $_GET['location'], array('delete', 'update'))  )  {
@@ -75,25 +76,30 @@ if (isset( $_SESSION['ADID']) && isset( $_GET['location'] ) && in_array( $_GET['
     <header id="header" class="fixed-top ">
         <div class="container d-flex align-items-center justify-content-between">
             <h1 class="logo"><a href="../index.php">Amart<span style="font-size: medium;">ADMIN</span></a></h1>
-            <nav class="nav-bar d-none d-lg-block">
+            <!-- <nav class="nav-bar d-none d-lg-block">
                 <ul>
 
             <?php displayCategory() ?>
 
                 </ul>
-            </nav>
-            <nav class="nav-bar d-lg-none d-sm-block">
+            </nav> -->
+            <!-- <nav class="nav-bar d-lg-none d-sm-block">
                 <ul>
                     <li class="drop-down">
                         <a></a>
                         <ul>
+                            <li class="active"><a href="index.php">Home</a></li>
+                            <li class="drop-down"><a>Shop by Category</a>
+                                <ul>
 
-                <?php displayCategory() ?>
+                        <?php displayCategory() ?>
 
+                                </ul>
+                                <li><a href="admin/admin_index.php">Admin</a></li>
                         </ul>
-                    </li>
+                        </li>
                 </ul>
-            </nav>
+            </nav> -->
             <div class="dropdown login-btn">
                 <p style="margin-bottom: 0px;"> <?php echo $_SESSION['ADBASICINFO']['AD_FIRSTNAME'] ?> </p>
                 <div class="dropdown-content">

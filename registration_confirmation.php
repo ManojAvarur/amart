@@ -1,7 +1,11 @@
-<?php require "_headers/connection.php" ?>
-
 <?php
+
+require "_headers/connection.php"; 
+
+require "_headers/functions.php"; 
+
 session_start();
+
 
 
 if (isset($_SESSION['postdata']))

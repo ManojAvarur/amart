@@ -112,7 +112,7 @@
                         </div>
                     </div>";
             } else {
-                echo "<a href=\"login.php\" class=\"login-btn\">Log In</a>";
+                echo "<a href='login.php' class='login-btn'>Log In</a>";
             }
         ?>
             

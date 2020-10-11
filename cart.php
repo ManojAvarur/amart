@@ -199,7 +199,8 @@ require "_headers/functions.php";
                     <p class="total-value final-value" id="basket-total"><?php echo $subTotal ?></p>
                 </div>
                 <div class="summary-checkout">
-                    <button class="checkout-cta">Go to Secure Checkout</button>
+                    <!-- <button class="checkout-cta" target="_blank" href="_headers/sendMail.php">Go to Secure Checkout</button> -->
+                    <a class="checkout-cta" target="_blank" href="_headers/sendMail.php" > Send Mail</a>
                 </div>
             </div>
         </aside>

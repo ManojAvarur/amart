@@ -1,9 +1,7 @@
 <?php
 
-use function PHPSTORM_META\type;
-
 require "_headers/connection.php";
-    require "_headers/functions.php";
+require "_headers/functions.php";
 
     session_start();
 

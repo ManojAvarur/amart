@@ -238,7 +238,7 @@ if( isset( $_POST['reinsert_password'] ) && isset( $_SESSION['LOGIN_ID'] ) ){
                                             </p>
                                             <p style='padding-top: 3%; text-align: right; margin-right: 2%;'>Incorrect Mail?
                                                 <span>
-                                                    <a href='destoryCode.php' id='mailReset'>Click Here</a>
+                                                    <a href='_headers/destroyCode.php' id='mailReset'>Click Here</a>
                                                 </span>
                                             </p>
                                             <hr class='my-4'>

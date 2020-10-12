@@ -1,0 +1,19 @@
+------------------------------------------- Things To BE Done -------------------------------------
+
+-> Dropdown for category 
+-> After login userpage
+-> Images are not being displayed in index page
+-> Image is not getting cropped after upload
+-> Information about discount
+-> Doubts regarding database
+--> Quantity update
+--> Subtotal update
+
+
+
+ ------------------------------------------ Completed --------------------------------------
+
+
+
+--> Products not aliging in display
+--> View cart button (is it needed!?)

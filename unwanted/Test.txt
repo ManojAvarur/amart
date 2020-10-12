@@ -1,0 +1,13 @@
+HTML/*
+.vscode/*
+unwanted/mailsend.php
+_headers/mailsend.php
+# https://github.com/smknarr/AMART.git
+
+# For html users:
+# RewriteEngine On
+# RewriteCond %{REQUEST_FILENAME} !-f
+# RewriteRule ^([^\.]+)$ $1.html [NC,L]
+
+
+

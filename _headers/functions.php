@@ -197,7 +197,6 @@ function echoCategories($check = 0, $escape = 0){
 
     $sql = mysqli_query( $con, $sql );
 
-    
 
         if($check){
             while ( $row = mysqli_fetch_assoc( $sql )) {

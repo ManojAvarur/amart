@@ -138,7 +138,7 @@ if(isset($_POST['submit'])) {
                                 </div>
 
                                 <div class="form-label-group">
-                                    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" name="password" required onKeyup="checkform()">
+                                    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" name="password" required onKeyup="checkform()" minlength = "8">
                                     <label for="inputPassword">Password</label>
                                 </div>
 

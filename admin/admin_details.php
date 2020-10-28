@@ -39,9 +39,9 @@ require "../_headers/connection.php";
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Amart Admin</title>
-    <meta content="Amart, amart sales, amart india" name="description">
-    <meta content="Amart, India, Sales, Refrigerator Sales, TV Sales, Hardware Sales" name="keywords">
+    <title>Smart Electronics Admin</title>
+    <meta content="smart, smart sales, smart electronics india" name="description">
+    <meta content="Smart, India, Sales, Refrigerator Sales, TV Sales, Hardware Sales" name="keywords">
     <link href="../assets/img/a.png" rel="icon">
     <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
     <link href="../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
@@ -59,7 +59,7 @@ require "../_headers/connection.php";
 <body>
 <header id="header" class="fixed-top ">
         <div class="container d-flex align-items-center justify-content-between">
-            <h1 class="logo"><a href="../index.php">Amart<span style="font-size: medium;">ADMIN</span></a></h1>
+            <h1 class="logo"><a href="../index.php">Smart<span style="font-size: medium;">ADMIN</span></a></h1>
             <nav class="nav-bar d-none d-lg-block">
                 <ul>
                     <li><a href="admin_add.php">Add Product</a></li>

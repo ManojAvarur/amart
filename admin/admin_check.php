@@ -15,7 +15,7 @@
 <?php 
     require "../_headers/connection.php";
 
-    $select = "SELECT P.PRD_NAME, P.PRD_DETAILS, I.IMG_PATH FROM PRD_IMAGE I, PRODUCT P WHERE P.PRD_ID = I.IMG_PRD_ID GROUP BY P.PRD_ID; " ;
+    $select = "SELECT P.PRD_NAME, P.PRD_DETAILS, P.PRD_PRICE,P.PRD_OFFERS, I.IMG_PATH FROM PRD_IMAGE I, PRODUCT P WHERE P.PRD_ID = I.IMG_PRD_ID GROUP BY P.PRD_ID; " ;
 
     $qselect = mysqli_query($con, $select);
 
@@ -31,9 +31,9 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Amart</title>
-    <meta content="Amart, amart sales, amart india" name="description">
-    <meta content="Amart, India, Sales, Refrigerator Sales, TV Sales, Hardware Sales" name="keywords">
+    <title>Smart Electronics Admin</title>
+    <meta content="smart, smart sales, smart electronics india" name="description">
+    <meta content="Smart, India, Sales, Refrigerator Sales, TV Sales, Hardware Sales" name="keywords">
     <link href="../assets/img/a.png" rel="icon">
     <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
     <link href="../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
@@ -51,7 +51,7 @@
 <body>
     <header id="header" class="fixed-top ">
         <div class="container d-flex align-items-center justify-content-between">
-            <h1 class="logo"><a href="../index.php">Amart<span style="font-size: medium;">ADMIN</span></a></h1>
+            <h1 class="logo"><a href="../index.php">Smart<span style="font-size: medium;">ADMIN</span></a></h1>
             <nav class="nav-bar d-none d-lg-block">
                 <ul>
                     <li><a href="admin_add.php">Add Product</a></li>
@@ -115,7 +115,9 @@
                         <!-- <div class="icon"  style='background-image: url("<?php  echo $rows['IMG_PATH']; ?>");'>  </div> -->
                         <div class="icon"  > <img src="../<?php  echo $rows['IMG_PATH']; ?>" alt="" width= "250" height= "250">  </div>
                         <h4><a href=""><?php  echo $rows['PRD_NAME']; ?></a></h4>
-                        <p><?php echo $rows['PRD_DETAILS']; ?></p>
+                        <p><?php echo $rows['PRD_DETAILS']; ?></p><br>
+                        <p style="color: #2962ff"> <?php echo $rows['PRD_OFFERS'];?></p><br>
+                        <h5><b>₹ </b> <?php echo $rows['PRD_PRICE']; ?></h5>
                     </div>
                 </div>
 

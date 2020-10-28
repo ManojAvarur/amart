@@ -16,11 +16,11 @@
     }
 
 
-    $select = "SELECT P.PRD_NAME, P.PRD_DETAILS, I.IMG_PATH, P.PRD_ID FROM PRD_IMAGE I, PRODUCT P WHERE P.PRD_ID = I.IMG_PRD_ID GROUP BY P.PRD_ID; " ;
+    $select = "SELECT P.PRD_NAME, P.PRD_DETAILS, I.IMG_PATH,P.PRD_PRICE,P.PRD_OFFERS, P.PRD_ID FROM PRD_IMAGE I, PRODUCT P WHERE P.PRD_ID = I.IMG_PRD_ID GROUP BY P.PRD_ID; " ;
 
     $qselect = mysqli_query($con, $select);
 
-    $query = "SELECT CAT_ID, CAT_NAME FROM CATEGORY; ";
+    $query = "SELECT CAT_ID, CAT_NAME,  FROM CATEGORY; ";
 
     $query = mysqli_query($con, $query)
 
@@ -36,9 +36,9 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Amart</title>
-    <meta content="Amart, amart sales, amart india" name="description">
-    <meta content="Amart, India, Sales, Refrigerator Sales, TV Sales, Hardware Sales" name="keywords">
+    <title>Smart Electronics</title>
+    <meta content="smart, smart sales, smart electronics india" name="description">
+    <meta content="Smart, India, Sales, Refrigerator Sales, TV Sales, Hardware Sales" name="keywords">
     <link href="assets/img/a.png" rel="icon">
     <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
     <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
@@ -57,7 +57,7 @@
 
     <header id="header" class="fixed-top ">
         <div class="container d-flex align-items-center justify-content-between">
-            <h1 class="logo"><a href="index.php">Amart<span>.</span></a></h1>
+            <h1 class="logo"><a href="index.php">Smart<span class="he">Electronics</span></a></h1>
             <nav class="nav-bar d-none d-lg-block">
                 <ul>
                     <li class="active"><a href="index.php">Home</a></li>
@@ -110,8 +110,8 @@
     <section id="main_home" class="d-flex align-items-center justify-content-center">
         <div class="container">
             <div class="row justify-content-center" data-aos="fade-down" data-aos-delay="150">
-                <div class="col-xl-6 col-lg-8">
-                    <h1>Welcome to AMART<span>.</span></h1>
+                <div>
+                    <h1>Welcome to SMART<span class="he1">ELECTRONICS</span></h1>
                     <h2>Choose from a wide range of products at unbelievable discounts</h2>
                 </div>
             </div>
@@ -176,7 +176,9 @@
                     <div class='icon-box'>
                         <div class='icon'> <img src='" . $rows['IMG_PATH'] . "' alt='" . $rows['PRD_DETAILS'] . "' width= '250' height= '250'>  </div>
                         <h4><a href=''>". $rows['PRD_NAME'] ."</a></h4>
-                        <p>" . $rows['PRD_DETAILS'] . "</p> 
+                        <p>" . $rows['PRD_DETAILS'] . "</p><br>
+                        <p style=\"color: #f44336\">" . $rows['PRD_OFFERS'] . "</p>
+                        <h5> <b>₹ </b> " . $rows['PRD_PRICE'] . "</h5> 
                         <br>";
 
                 if( isset( $_SESSION['ID'] ) )

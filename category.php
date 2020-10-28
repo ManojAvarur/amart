@@ -50,8 +50,8 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title><?php echo $name ?></title>
-    <meta content="Amart, amart sales, amart india" name="description">
-    <meta content="Amart, India, Sales, Refrigerator Sales, TV Sales, Hardware Sales" name="keywords">
+    <meta content="smart, smart sales, smart electronics india" name="description">
+    <meta content="Smart, India, Sales, Refrigerator Sales, TV Sales, Hardware Sales" name="keywords">
     <link href="assets/img/a.png" rel="icon">
     <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -69,7 +69,7 @@
 <body>
     <header id="header" class="fixed-top ">
         <div class="container d-flex align-items-center justify-content-between">
-            <h1 class="logo"><a href="index.php">Amart<span>.</span></a></h1>
+            <h1 class="logo"><a href="index.php">Smart<span class="he">Electronics</span></a></h1>
             <nav class="nav-bar d-none d-lg-block">
                 <ul>
                     <li class="active"><a href="index.php">Home</a></li>

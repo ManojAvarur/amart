@@ -85,7 +85,7 @@
         
 
         $mail = new PHPMailer;
-        $mail->SMTPDebug = 1;   
+        // $mail->SMTPDebug = 1;   
         $mail->isSMTP();                                       
         $mail->Host = 'smtp.gmail.com';  
         $mail->SMTPAuth = true;                               

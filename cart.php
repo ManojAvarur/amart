@@ -198,7 +198,7 @@ require "_headers/functions.php";
                 </div>
                 <div class="summary-checkout">
                     <!-- <button class="checkout-cta" target="_blank" href="_headers/sendMail.php">Go to Secure Checkout</button> -->
-                    <button class="checkout-cta" target="_blank" href="_headers/sendMail.php" >Secure Checkout</button>
+                   <a href="_headers/sendMail.php"> <button class="checkout-cta">Secure Checkout</button></a>
                 </div>
             </div>
         </aside>

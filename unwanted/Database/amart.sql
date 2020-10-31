@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 18, 2020 at 09:34 PM
+-- Generation Time: Oct 31, 2020 at 06:45 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -69,6 +69,18 @@ CREATE TABLE `cart` (
   `CRT_QUANTITY` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`CRT_LOGIN_ID`, `CRT_PRD_ID`, `CRT_QUANTITY`) VALUES
+('9ab81b41c023b9cdacb228111bb88fba', '1001', 4),
+('9ab81b41c023b9cdacb228111bb88fba', '1002', 2),
+('9ab81b41c023b9cdacb228111bb88fba', '1003', 1),
+('1a9f8026594580d5c646cf51179cc3ea', '1001', 1),
+('1a9f8026594580d5c646cf51179cc3ea', '1002', 3),
+('9ab81b41c023b9cdacb228111bb88fba', '1004', 3);
+
 -- --------------------------------------------------------
 
 --
@@ -85,10 +97,9 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`CAT_ID`, `CAT_NAME`) VALUES
-(2001, 'Electronics'),
-(2002, 'Furniture'),
-(2003, 'Kitchen'),
-(2004, 'Bathroom');
+(1001, 'Hardware'),
+(1002, 'Electricals'),
+(1003, 'Electronics');
 
 -- --------------------------------------------------------
 
@@ -107,7 +118,8 @@ CREATE TABLE `cookie` (
 --
 
 INSERT INTO `cookie` (`CK_ID`, `CK_LOGIN_ID`, `CK_VALUE`) VALUES
-(1, '9ab81b41c023b9cdacb228111bb88fba', '3T10Z8d3334965d0ffa935af70b31d7475ff4ozMiOPOUKsEy8xLA0A5SumftkHNycXGDgCoOdtugJdAHP6HwZ4u7rhvbygJ91xh3w5QvtpnYR1ZhipjQvQzr7FeZ7gNP5tmMoN4MWjYF0sj8rNB3Vp5lRhLsk1yMMkk1O2B7bQ5HVMCG9Peaf77fKmLMvQSygwR3msId599jg5Um3eGneJFPKOdZX5xGtXadGbVxQeuQUZlqQ5NaJkYTAxSBeHDH9QB8nmjCEAQKPv6');
+(1, '9ab81b41c023b9cdacb228111bb88fba', '3T10Z8d3334965d0ffa935af70b31d7475ff4ozMiOPOUKsEy8xLA0A5SumftkHNycXGDgCoOdtugJdAHP6HwZ4u7rhvbygJ91xh3w5QvtpnYR1ZhipjQvQzr7FeZ7gNP5tmMoN4MWjYF0sj8rNB3Vp5lRhLsk1yMMkk1O2B7bQ5HVMCG9Peaf77fKmLMvQSygwR3msId599jg5Um3eGneJFPKOdZX5xGtXadGbVxQeuQUZlqQ5NaJkYTAxSBeHDH9QB8nmjCEAQKPv6'),
+(2, '1a9f8026594580d5c646cf51179cc3ea', '3T10Z3295116fb3530f2d1ffe8abd5575969dozMiOPOUKsEy8xLA0A5SumftkHNycXGDgCoOdtugJdAHP6HwZ4u7rhvbygJ91xh3w5QvtpnYR1ZhipjQvQzr7FeZ7gNP5tmMoN4MWjYF0sj8rNB3Vp5lRhLsk1yMMkk1O2B7bQ5HVMCG9Peaf77fKmLMvQSygwR3msId599jg5Um3eGneJFPKOdZX5xGtXadGbVxQeuQUZlqQ5NaJkYTAxSBeHDH9QB8nmjCEAQKPv6');
 
 -- --------------------------------------------------------
 
@@ -128,7 +140,8 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`LOGIN_ID`, `EMAIL_ID`, `USER_PASSWORD`, `USER_FNAME`, `USER_PHNO`) VALUES
-('9ab81b41c023b9cdacb228111bb88fba', 'manojavarur@gmail.com', '6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918', 'Manoj A M', 123456789);
+('1a9f8026594580d5c646cf51179cc3ea', 'keerthanaravikumarnaidu@gmail.com', 'f4bf9f7fcbedaba0392f108c59d8f4a38b3838efb64877380171b54475c2ade8', 'Keer', 7821),
+('9ab81b41c023b9cdacb228111bb88fba', 'manojavarur@gmail.com', 'f4bf9f7fcbedaba0392f108c59d8f4a38b3838efb64877380171b54475c2ade8', 'Manoj A M', 123456789);
 
 -- --------------------------------------------------------
 
@@ -159,8 +172,9 @@ CREATE TABLE `prd_image` (
 --
 
 INSERT INTO `prd_image` (`IMG_PRD_ID`, `IMG_PATH`) VALUES
-('EL-ST-123', 'Products/Images/Something-94493832710.png'),
-('EL-ST-123', 'Products/Images/Something-94493832710-0.png');
+('ENT - 123', 'Products/Images/Fridge-94548599608.png'),
+('ENT - 124', 'Products/Images/Wires-94548599680.png'),
+('ENT - 125', 'Products/Images/Lock and key-94548600064.png');
 
 -- --------------------------------------------------------
 
@@ -182,7 +196,9 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`PRD_CAT_ID`, `PRD_ID`, `PRD_NAME`, `PRD_DETAILS`, `PRD_OFFERS`, `PRD_PRICE`) VALUES
-(2001, 'EL-ST-123', 'Something', 'Google It!', 'Fuck Off', 12);
+(1003, 'ENT - 123', 'Fridge', 'Silver colored light weight', '25% off', 15000),
+(1001, 'ENT - 124', 'Wires', 'Strong ', 'Buy one get one free', 500),
+(1001, 'ENT - 125', 'Lock and key', 'Durable', '10% off', 850);
 
 -- --------------------------------------------------------
 
@@ -283,13 +299,13 @@ ALTER TABLE `address`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `CAT_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2005;
+  MODIFY `CAT_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1004;
 
 --
 -- AUTO_INCREMENT for table `cookie`
 --
 ALTER TABLE `cookie`
-  MODIFY `CK_ID` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `CK_ID` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `orders`

@@ -216,7 +216,6 @@ if( isset( $_POST['reinsert_password'] ) && isset( $_SESSION['LOGIN_ID'] ) ){
                                 echo "
                                         <h5 class='card-title text-center'>Email Verification!</h5>
                                         <p style='margin-top: -8%;padding-bottom: 5%;text-align: center;'>Check your mail '" . $_SESSION['frgtPass']['email'] . "' for activation passcode</p>
-
                                     ";
 
                                 if( $spanCheck )
@@ -225,9 +224,9 @@ if( isset( $_POST['reinsert_password'] ) && isset( $_SESSION['LOGIN_ID'] ) ){
     
                                 echo "
                                         <form class='form-signin' action='forgot_password.php' method='post'>
-                                            <div class='form-label-group'>
-                                                <input type='text' name='passcode' id='inputEmail' class='form-control' placeholder='Email address' required autofocus>
-                                                <label for='inputEmail'>Enter the Passcode</label>
+                                            <div class='form-label-group'>                        
+                                            <input type='text' name='passcode' id='inputEmail' class='form-control' placeholder='Email address' required autofocus>
+                                            <label for='inputEmail'>Enter the Passcode</la                    bel>
                                             </div>
 
                                             <button class='btn btn-lg btn-block text-uppercase' style='background-color: #000; color: #fff;' name='ver_submit' type='submit'>Submit</button>

@@ -146,7 +146,7 @@ function mailing($email, $val){
                     <!--[if mso]><table width='100%' cellpadding='0' cellspacing='0' border='0'><tr><td style='padding-right: 10px; padding-left: 10px; padding-top: 5px; padding-bottom: 5px; font-family: Arial, sans-serif'><![endif]-->
                     <div style='color:#ffffff;font-family:Arial, Helvetica Neue, Helvetica, sans-serif;line-height:1.2;padding-top:5px;padding-right:10px;padding-bottom:5px;padding-left:10px;'>
                         <div style='line-height: 1.2; font-size: 12px; color: #ffffff; font-family: Arial, Helvetica Neue, Helvetica, sans-serif; mso-line-height-alt: 14px;'>
-                            <p style='font-size: 14px; line-height: 1.2; word-break: break-word; text-align: right; mso-line-height-alt: 17px; margin: 0;'><strong><span style='font-size: 15px;'>Code # :</span></strong></p>
+                            <p style='font-size: 14px; line-height: 1.2; word-break: break-word; text-align: right; mso-line-height-alt: 17px; margin: 0;'><strong><span style='font-size: 15px;'>Code Number:</span></strong></p>
                         </div>
                     </div>
                     <!--[if mso]></td></tr></table><![endif]-->
@@ -166,7 +166,7 @@ function mailing($email, $val){
         <!--[if mso]><table width='100%' cellpadding='0' cellspacing='0' border='0'><tr><td style='padding-right: 10px; padding-left: 10px; padding-top: 5px; padding-bottom: 5px; font-family: Arial, sans-serif'><![endif]-->
         <div style='color:#ffffff;font-family:Arial, Helvetica Neue, Helvetica, sans-serif;line-height:1.2;padding-top:5px;padding-right:10px;padding-bottom:5px;padding-left:10px;'>
             <div style='line-height: 1.2; font-size: 12px; color: #ffffff; font-family: Arial, Helvetica Neue, Helvetica, sans-serif; mso-line-height-alt: 14px;'>
-                <p style='font-size: 15px; line-height: 1.2; word-break: break-word; text-align: left; mso-line-height-alt: 18px; margin: 0;'><span style='font-size: 15px;'>" . $val . "</span></p>
+                <p style='font-size: 15px; line-height: 1.2; color: #C69962; word-break: break-word; text-align: left; mso-line-height-alt: 18px; margin: 0;'><span style='font-size: 15px;'>" . $val . "</span></p>
             </div>
         </div>
     ";
@@ -297,6 +297,20 @@ $msg1 = "
             a[x-apple-data-detectors=true] {
                 color: inherit !important;
                 text-decoration: none !important;
+            }
+            .logo{
+                font-size: 32px;
+                color: white;
+                margin: 0;
+                padding: 0;
+                line-height: 1;
+                font-weight: 700;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+            }
+            .he{
+                font-size: 15px;
+                color: #C69962;
             }
         </style>
     <style id='media-query' type='text/css'>
@@ -453,7 +467,8 @@ $msg1 = "
         <!--<![endif]-->
         <div align='center' class='img-container center autowidth' style='padding-right: 10px;padding-left: 10px;'>
         <!--[if mso]><table width='100%' cellpadding='0' cellspacing='0' border='0'><tr style='line-height:0px'><td style='padding-right: 10px;padding-left: 10px;' align='center'><![endif]-->
-        <div style='font-size:1px;line-height:10px'> </div><img align='center' alt='Amart Logo' border='0' class='center autowidth' src='https://lh4.googleusercontent.com/KIsZFdQNifCpvPHvd0rEdiveBlDv3wma3YMfowdBSP6ZVaZ0mZ8xqvUIZUpqO61N2jjK_-Zg71IYxw=w1920-h937' style='text-decoration: none; -ms-interpolation-mode: bicubic; height: auto; border: 0; width: 100%; max-width: 50px; display: block;' title='Alternate text' width='50'/>
+        <div style='font-size:1px;line-height:10px'> </div>
+        <h1 class='logo'>SMART<span class='he'>ELECTRONICS</span></h1>
         <div style='font-size:1px;line-height:15px'> </div>
         <!--[if mso]></td></tr></table><![endif]-->
         </div>
@@ -495,7 +510,7 @@ $msg1 = "
         <!--[if mso]><table width='100%' cellpadding='0' cellspacing='0' border='0'><tr><td style='padding-right: 25px; padding-left: 25px; padding-top: 0px; padding-bottom: 0px; font-family: Arial, sans-serif'><![endif]-->
         <div style='color:#ffffff;font-family:'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;line-height:1.2;padding-top:0px;padding-right:25px;padding-bottom:0px;padding-left:25px;'>
         <div style='line-height: 1.2; font-size: 12px; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #ffffff; mso-line-height-alt: 14px;'>
-        <p style='font-size: 30px; line-height: 1.2; word-break: break-word; text-align: center; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; mso-line-height-alt: 36px; margin: 0;'><span style='font-size: 30px;'><strong>Your Activation Code!</strong></span></p>
+        <p style='font-size: 30px; line-height: 1.2; word-break: break-word; text-align: center; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; mso-line-height-alt: 36px; margin: 0;'><span style='font-size: 30px; color: white;'><strong>Hey! </strong><br>Your Activation Code is:</span></p>
         </div>
         </div>
         <!--[if mso]></td></tr></table><![endif]-->

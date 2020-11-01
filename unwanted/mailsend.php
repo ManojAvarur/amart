@@ -51,9 +51,9 @@ $message .= "</body></html>";
 // $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
 // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
 $mail->isHTML(true);                                  // Set email format to HTML
-$message = "<strong> Gube Keerthana! </strong>";
+$message = "<strong> Hello! </strong>";
 
-$mail->Subject = 'Notice from Big Baazar';
+$mail->Subject = 'Notice from Smart Electronics';
 $mail->Body    = $message;//'This is the HTML message body <b>in bold!</b>';
 $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 

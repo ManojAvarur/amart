@@ -11,9 +11,15 @@
         $lid = mysqli_escape_string( $con, $_SESSION['ID'] );
         $delete = mysqli_escape_string( $con, $_POST['delete'] );
         $sql = "DELETE FROM cart WHERE CRT_LOGIN_ID = '" . $lid . "' AND CRT_PRD_ID = '" . $delete . "'; ";
+
+        // $myfile = fopen("newfile.txt", "w");
+        // fwrite($myfile, $sql);
+        // fclose($myfile);
+
         mysqli_query( $con, $sql );
         die();
-        
+    }
+
     if( isset( $_POST['token'] )  && isset( $_SESSION['ID'] ) && isset( $_POST['updateQuantity'] ) && $_POST['token'] != "" && $_POST['updateQuantity'] != "" && !( isset( $_POST['delete'] ) )  && !( isset( $_POST['atc'] ) ) ){
 
         if( $_POST['updateQuantity'] >= 1 && $_POST['updateQuantity'] < 5 ){
@@ -26,9 +32,9 @@
             $sql .= "WHERE CRT_PRD_ID = '" . $pid . "' AND ";
             $sql .= "CRT_LOGIN_ID = '" . $lid . "'; ";
             mysqli_query( $con, $sql );
-            die(" ");
+            echo "200";
         } else {
-            die("Quantity cannot be 0 and should be less than 5");
+            echo "Quantity cannot be 0 and should be less than 5";
         }
     }
 
@@ -40,7 +46,7 @@
         $sql = "SELECT * FROM cart WHERE CRT_LOGIN_ID = '" . $lid . "' AND CRT_PRD_ID = '" . $pid . "'; ";
 
         if( mysqli_num_rows( mysqli_query( $con, $sql ) ) > 0 ){
-            die("Product exists in your cart!");
+            echo "Product exists in your cart!";
         } else {
             $sql = "INSERT INTO cart VALUES ";
             $sql .= "( '" . $lid . "', ";
@@ -48,6 +54,8 @@
 
             mysqli_query( $con, $sql );
 
-            die("Added to cart!");
+           echo "Added to cart!";
         }
     }
+
+    ?>

@@ -93,7 +93,7 @@ require "_headers/functions.php";
                 echo "<div class='dropdown login-btn'>
                         <p style='margin-top: 0px; margin-bottom:0px;'>" . $_SESSION['BASICINFO']['USER_FNAME'] . "</p>
                         <div class='dropdown-content'>
-                            <a href='#'>Home</a>
+                            <a href='index.php'>Home</a>
                             <a href='cart.php'>My Cart</a>
                             <a href='_headers/logout.php'>Log Out</a>
                         </div>
@@ -197,8 +197,9 @@ require "_headers/functions.php";
                     <p class="total-value final-value" id="basket-total"><?php echo $subTotal ?></p>
                 </div>
                 <div class="summary-checkout">
-                    <!-- <button class="checkout-cta" target="_blank" href="_headers/sendMail.php">Go to Secure Checkout</button> -->
-                    <button class="checkout-cta" target="_blank" href="_headers/sendMail.php" >Secure Checkout</button>
+                    <!-- <button class="checkout-cta"  href="_headers/sendMail.php">Go to Secure Checkout</button> -->
+                    <button class="checkout-cta" onclick="SecureMail()">Secure Checkout</button>
+                    <!-- <input type="button" class="checkout-cta"  href="_headers/sendMail.php" target="_blank" value="Secure Checkout"> -->
                 </div>
             </div>
         </aside>
@@ -253,8 +254,17 @@ require "_headers/functions.php";
     <script src="assets/vendor/aos/aos.js"></script>
     <script src="assets/js/main.js"></script>
     <script>
-
-        
+        function SecureMail(){
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("POST", "_headers/sendMail.php" , true);
+            xhttp.send();
+            xhttp.onreadystatechange = function() {
+                if ( this.readyState == 4 && this.status == 200 ) {
+                    alert("Mail has been sent!");
+                }
+            };
+        }
+       
         function reCalculate( val ){
             var prdPrice = parseFloat( document.getElementById( val + "-product-price" ).value );
             var quant = parseInt( document.getElementById( val + "-quantity" ).value );
@@ -286,7 +296,7 @@ require "_headers/functions.php";
             if( quantity < 5 && quantity >= 1 ){
                 xhttp.send("token="+val+"&updateQuantity="+quantity);
                 xhttp.onreadystatechange = function() {
-                    if ( this.readyState == 4 && this.status == 200 && this.responseText != " " ) {
+                    if ( this.readyState == 4 && this.status == 200 && parseInt( this.responseText ) != 200 ) {
                         alert( this.responseText );
                     }
                 };
@@ -300,10 +310,12 @@ require "_headers/functions.php";
                     document.getElementById( val + "-quantity" ).value = 4;
                     alert("Quantity cannot be greater than 4");
                     reCalculate( val );
+                    modify( val );
                 }else if( quantity < 1 ){
                     document.getElementById( val + "-quantity" ).value = 1;
                     alert("Quantity cannot be less than 1");
                     reCalculate( val );
+                    modify( val );
                 }
             }
         }

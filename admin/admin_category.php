@@ -103,7 +103,7 @@
         </header>
 
 
-        <div class="log_main">
+        <div class="admin_log_main">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
@@ -116,7 +116,7 @@
                                         <input type="text" name="category" id="inputCategory" class="form-control" placeholder="Category Name" required autofocus>
                                         <label for="inputCategory">Enter the Category</label>
                                     </div>
-
+                                    <p style="color: #2196f3; font-size: 12px;">*<b>Note:</b> Please double check before you submit</p>
                                     <button class="btn btn-lg btn-block text-uppercase" style="background-color: #000; color: #fff;" type="submit">Submit</button>
                                     <!-- <p style="padding-top: 3%; text-align: right; margin-right: 2%;">Didn't receive a mail? <span><a href="signup.html">Try Again</a></span></p> -->
                                     

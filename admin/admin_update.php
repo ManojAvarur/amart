@@ -131,8 +131,9 @@ if (isset( $_SESSION['ADID']) && isset( $_SESSION['prd'] ) )  {
             <nav class="nav-bar d-none d-lg-block">
                 <ul>
                     <li><a href="admin_add.php">Add Product</a></li>
-                    <li><a href="product_id_enter.php?location=delete">Delete Product</a></li>
-                    <li><a href="product_id_enter.php?location=update">Update Product</a></li>
+                    <li><a href="admin_product_id_enter.php?location=delete">Delete Product</a></li>
+                    <li><a href="admin_product_id_enter.php?location=update">Update Product</a></li>
+                    <li><a href="admin_category.php">Add Category</a></li>
                     <li><a href="admin_check.php">Check Products</a></li>
                 </ul>
             </nav>
@@ -142,8 +143,9 @@ if (isset( $_SESSION['ADID']) && isset( $_SESSION['prd'] ) )  {
                         <a></a>
                         <ul>
                         <li><a href="admin_add.php">Add Product</a></li>
-                        <li><a href="product_id_enter.php?location=delete">Delete Product</a></li>
-                        <li><a href="product_id_enter.php?location=update">Update Product</a></li>
+                        <li><a href="admin_product_id_enter.php?location=delete">Delete Product</a></li>
+                        <li><a href="admin_product_id_enter.php?location=update">Update Product</a></li>
+                        <li><a href="admin_category.php">Add Category</a></li>
                         <li><a href="admin_check.php">Check Products</a></li>
                         </ul>
                     </li>
@@ -244,7 +246,7 @@ if (isset( $_SESSION['ADID']) && isset( $_SESSION['prd'] ) )  {
                     <div class="col-lg-3 col-md-6 footer-links">
                         <h4>Contact Us</h4>
                         <ul>
-<li><i class="bx bx-wifi-1"></i> <a href="#">Email: no.replay.amart@gmail.com</a></li>
+    <li><i class="bx bx-wifi-1"></i> <a href="#">Email: no.replay.amart@gmail.com</a></li>
                             <li><i class="bx bx-wifi-1"></i> <a href="#">Phone Number: +91 9800102010</a></li>
                         </ul>
                     </div>

@@ -63,8 +63,9 @@ require "../_headers/connection.php";
             <nav class="nav-bar d-none d-lg-block">
                 <ul>
                     <li><a href="admin_add.php">Add Product</a></li>
-                    <li><a href="product_id_enter.php?location=delete">Delete Product</a></li>
-                    <li><a href="product_id_enter.php?location=update">Update Product</a></li>
+                    <li><a href="admin_product_id_enter.php?location=delete">Delete Product</a></li>
+                    <li><a href="admin_product_id_enter.php?location=update">Update Product</a></li>
+                    <li><a href="admin_category.php">Add Category</a></li>
                     <li><a href="admin_check.php">Check Products</a></li>
                 </ul>
             </nav>
@@ -75,6 +76,7 @@ require "../_headers/connection.php";
                             <li><a href="admin_add.php">Add Product</a></li>
                             <li><a href="admin_delete.php">Delete Product</a></li>
                             <li><a href="admin_update.php">Update Product</a></li>
+                            <li><a href="admin_category.php">Add Category</a></li>
                             <li><a href="admin_check.php">Check Products</a></li>
                         </ul>
                     </li>

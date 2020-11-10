@@ -57,6 +57,7 @@
                     <li><a href="admin_add.php">Add Product</a></li>
                     <li><a href="admin_delete.php">Delete Product</a></li>
                     <li><a href="admin_update.php">Update Product</a></li>
+                    <li><a href="admin_category.php">Add Category</a></li>
                     <li><a href="admin_check.php">Check Products</a></li>
                 </ul>
             </nav>
@@ -68,6 +69,7 @@
                             <li><a href="admin_add.php">Add Product</a></li>
                             <li><a href="admin_delete.php">Delete Product</a></li>
                             <li><a href="admin_update.php">Update Product</a></li>
+                            <li><a href="admin_category.php">Add Category</a></li>
                             <li><a href="admin_check.php">Check Products</a></li>
                         </ul>
                     </li>

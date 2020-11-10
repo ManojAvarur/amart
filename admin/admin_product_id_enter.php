@@ -36,7 +36,7 @@ if (isset( $_SESSION['ADID']) && isset( $_GET['location'] ) && in_array( $_GET['
     
             $_SESSION['prd'] = mysqli_fetch_all( $prd ) ;
             
-            header("location:confirmation.php?location=" . $_GET['location'] . "&&product=65d8c7b96b92a45209f71b245f9bf4809aba885272541b588ae8a94f7d32918b34536530&&token=fcfe053532b996235c34567282d8dd17dd6&&value=abcedba55195c3216c82a");
+            header("location:admin_confirmation.php?location=" . $_GET['location'] . "&&product=65d8c7b96b92a45209f71b245f9bf4809aba885272541b588ae8a94f7d32918b34536530&&token=fcfe053532b996235c34567282d8dd17dd6&&value=abcedba55195c3216c82a");
     
         } else {
 
@@ -116,8 +116,9 @@ if (isset( $_SESSION['ADID']) && isset( $_GET['location'] ) && in_array( $_GET['
             <nav class="nav-bar d-none d-lg-block">
                 <ul>
                     <li><a href="admin_add.php">Add Product</a></li>
-                    <li><a href="product_id_enter.php?location=delete">Delete Product</a></li>
-                    <li><a href="product_id_enter.php?location=update">Update Product</a></li>
+                    <li><a href="admin_product_id_enter.php?location=delete">Delete Product</a></li>
+                    <li><a href="admin_product_id_enter.php?location=update">Update Product</a></li>
+                    <li><a href="admin_category.php">Add Category</a></li>
                     <li><a href="admin_check.php">Check Products</a></li>
                 </ul>
             </nav>
@@ -128,6 +129,7 @@ if (isset( $_SESSION['ADID']) && isset( $_GET['location'] ) && in_array( $_GET['
                             <li><a href="admin_add.php">Add Product</a></li>
                             <li><a href="admin_delete.php">Delete Product</a></li>
                             <li><a href="admin_update.php">Update Product</a></li>
+                            <li><a href="admin_category.php">Add Category</a></li>
                             <li><a href="admin_check.php">Check Products</a></li>
                         </ul>
                     </li>
@@ -153,7 +155,7 @@ if (isset( $_SESSION['ADID']) && isset( $_GET['location'] ) && in_array( $_GET['
 
                         <h5 class="card-title text-center">Enter Product ID</h5>
 
-                            <form class="form-signin" action="product_id_enter.php" method="GET">
+                            <form class="form-signin" action="admin_product_id_enter.php" method="GET">
                             <?php
                                     if($spanCheck) { 
                             ?>

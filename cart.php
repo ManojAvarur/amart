@@ -198,7 +198,7 @@ require "_headers/functions.php";
                 </div>
                 <div class="summary-checkout">
                     <!-- <button class="checkout-cta"  href="_headers/sendMail.php">Go to Secure Checkout</button> -->
-                    <button class="checkout-cta" onclick="SecureMail()">Secure Checkout</button>
+                    <button class="checkout-cta" id="secureMail" onclick="SecureMail()">Secure Checkout</button>
                     <!-- <input type="button" class="checkout-cta"  href="_headers/sendMail.php" target="_blank" value="Secure Checkout"> -->
                 </div>
             </div>
@@ -255,12 +255,17 @@ require "_headers/functions.php";
     <script src="assets/js/main.js"></script>
     <script>
         function SecureMail(){
+            var button = document.getElementById('secureMail');
+            button.disabled = true;
+            button.classList.add("disabled-link");
             var xhttp = new XMLHttpRequest();
             xhttp.open("POST", "_headers/sendMail.php" , true);
             xhttp.send();
             xhttp.onreadystatechange = function() {
                 if ( this.readyState == 4 && this.status == 200 ) {
-                    alert("Mail has been sent!");
+                    alert(this.responseText);
+                    button.disabled = false;
+                    button.classList.remove("disabled-link");
                 }
             };
         }

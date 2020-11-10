@@ -939,3 +939,10 @@ section {
         max-width: 100%;
     }
 }
+
+.disabled-link{
+    cursor: default;
+    pointer-events: none;        
+    text-decoration: none;
+    color: grey;
+}

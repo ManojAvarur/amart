@@ -133,12 +133,12 @@ if(isset($_POST['submit'])) {
                                 </div>
 
                                 <div class="form-label-group">
-                                    <input type="tel" name="phone" id="inputNumber" class="form-control" placeholder="Contact Number" required autofocus onKeyup="checkform()">
+                                    <input type="tel" name="phone" id="inputNumber" class="form-control" placeholder="Contact Number" required autofocus onKeyup="checkform()" pattern="[7-9]{1}[0-9]{9}" title="Phone number with 7-9 and remaing 9 digit with 0-9">
                                     <label for="inputNumber">Contact Number</label>
                                 </div>
 
                                 <div class="form-label-group">
-                                    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" name="password" required onKeyup="checkform()">
+                                    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" name="password" required onKeyup="checkform()" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" title="UpperCase, LowerCase, Number/SpecialChar and min 8 Chars">
                                     <label for="inputPassword">Password</label>
                                 </div>
 

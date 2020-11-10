@@ -85,7 +85,7 @@
         
 
         $mail = new PHPMailer;
-        $mail->SMTPDebug = 1;   
+        // $mail->SMTPDebug = 1;   
         $mail->isSMTP();                                       
         $mail->Host = 'smtp.gmail.com';  
         $mail->SMTPAuth = true;                               
@@ -99,16 +99,16 @@
         
         $mail->Subject = 'Order Details';
         // $mail->Body    = $message;//'This is the HTML message body <b>in bold!</b>';
-        $mail->Body    = $heading . $table1 . $table2;//$message;//'This is the HTML message body <b>in bold!</b>';
-        $mail->AltBody = $message;
+        $mail->Body    = $heading . $table1 . $table2 . "<br><hr><h1> Admin will contact you shortly. </h1>";//$message;//'This is the HTML message body <b>in bold!</b>';
+        $mail->AltBody = $message . "Admin will contact you shortly. ";
 
         $mail->addAddress($user_mail);
+        $mail->addAddress('no.replay.amart@gmail.com');
 
-        echo "hi";
-
-        if(!$mail->send()) {
-            // echo "<script> alert('Message could not be sent \n Error Info :  $mail->ErrorInfo ') </script>";
-            die("<script> alert('Message could not be sent \n Error Info :  $mail->ErrorInfo ') </script>");
+        if($mail->send()) {
+            echo "Mail has been sent to your registerd email address!";
+        } else {
+            echo "Failed to place your order. \\n Please try again!";
         }
 
     }

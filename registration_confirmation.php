@@ -81,14 +81,6 @@ if (isset($_SESSION['postdata']))
     <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
     <link href="assets/vendor/aos/aos.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
-    <style>
-        .disabled-link{
-        cursor: default;
-        pointer-events: none;        
-        text-decoration: none;
-        color: grey;
-    }
-    </style>
 
 </head>
 

@@ -232,7 +232,7 @@ if(isset($_POST['submit'])) {
                     <div class="col-lg-3 col-md-6 footer-links">
                         <h4>Contact Us</h4>
                         <ul>
-<li><i class="bx bx-wifi-1"></i> <<a href="mailto:no.replay.amart@gmail.com">Email: no.replay.amart@gmail.com</a></li>
+<li><i class="bx bx-wifi-1"></i> <a href="mailto:no.replay.amart@gmail.com">Email: no.replay.amart@gmail.com</a></li>
                             <li><i class="bx bx-wifi-1"></i> <a href="tel:9800102010">Phone Number: +91 9800102010</a></li>
                         </ul>
                     </div>
